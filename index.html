@@ -2,479 +2,758 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JARVIS AI</title>
 
 <style>
 *{box-sizing:border-box}
+
 body{
- margin:0;
- background:#02070d;
- color:#00eaff;
- font-family:Arial,sans-serif;
- min-height:100vh;
- overflow:hidden;
+    margin:0;
+    min-height:100vh;
+    overflow:hidden;
+    background:#02070d;
+    color:#00eaff;
+    font-family:Arial,Helvetica,sans-serif;
 }
+
 body:before{
- content:"";
- position:fixed;
- inset:0;
- background:
- linear-gradient(rgba(0,234,255,.035) 1px,transparent 1px),
- linear-gradient(90deg,rgba(0,234,255,.035) 1px,transparent 1px);
- background-size:35px 35px;
- pointer-events:none;
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+      linear-gradient(rgba(0,234,255,.035) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(0,234,255,.035) 1px,transparent 1px);
+    background-size:35px 35px;
+    pointer-events:none;
 }
+
 .app{
- width:100%;
- height:100vh;
- display:flex;
- flex-direction:column;
+    width:100%;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
 }
+
 header{
- height:70px;
- display:flex;
- align-items:center;
- justify-content:space-between;
- padding:0 22px;
- border-bottom:1px solid #073844;
- background:rgba(2,12,19,.85);
+    height:65px;
+    padding:0 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid #073844;
+    background:rgba(2,12,19,.9);
 }
+
 .logo{
- font-size:25px;
- font-weight:bold;
- letter-spacing:5px;
- text-shadow:0 0 15px #00eaff;
+    font-size:24px;
+    font-weight:bold;
+    letter-spacing:5px;
+    text-shadow:0 0 15px #00eaff;
 }
+
 .status{
- font-size:12px;
- color:#65ffb5;
+    font-size:12px;
+    color:#65ffb5;
 }
+
 .main{
- flex:1;
- display:flex;
- flex-direction:column;
- align-items:center;
- min-height:0;
+    flex:1;
+    min-height:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 }
+
 .core-area{
- height:42%;
- min-height:260px;
- display:flex;
- justify-content:center;
- align-items:center;
- position:relative;
+    height:40%;
+    min-height:250px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
 }
+
 .core{
- width:150px;
- height:150px;
- border-radius:50%;
- border:2px solid #00eaff;
- box-shadow:
- 0 0 15px #00eaff,
- 0 0 45px rgba(0,234,255,.6),
- inset 0 0 35px rgba(0,234,255,.4);
- position:relative;
- animation:pulse 2s infinite;
+    width:145px;
+    height:145px;
+    border-radius:50%;
+    border:2px solid #00eaff;
+    position:relative;
+    box-shadow:
+        0 0 20px #00eaff,
+        0 0 55px rgba(0,234,255,.55),
+        inset 0 0 30px rgba(0,234,255,.4);
+    animation:pulse 2s infinite;
 }
-.core:before,.core:after{
- content:"";
- position:absolute;
- border-radius:50%;
- border:1px solid #00eaff;
- inset:-25px;
- animation:spin 7s linear infinite;
-}
+
+.core:before,
 .core:after{
- inset:-45px;
- animation:spin 12s linear infinite reverse;
- border-style:dashed;
- opacity:.6;
+    content:"";
+    position:absolute;
+    border:1px solid #00eaff;
+    border-radius:50%;
 }
+
+.core:before{
+    inset:-25px;
+    animation:spin 7s linear infinite;
+}
+
+.core:after{
+    inset:-45px;
+    border-style:dashed;
+    opacity:.6;
+    animation:spin 12s linear infinite reverse;
+}
+
 .center{
- position:absolute;
- inset:35px;
- border-radius:50%;
- background:#00eaff;
- box-shadow:0 0 35px #00eaff;
+    position:absolute;
+    inset:35px;
+    border-radius:50%;
+    background:#00eaff;
+    box-shadow:0 0 35px #00eaff;
 }
+
 .listening .core{
- animation:listen .45s infinite alternate;
- box-shadow:0 0 30px #00eaff,0 0 90px #00eaff;
+    animation:listen .45s infinite alternate;
+    box-shadow:
+        0 0 30px #00eaff,
+        0 0 90px #00eaff;
 }
+
 .speaking .core{
- animation:speak .18s infinite alternate;
- box-shadow:0 0 35px #00eaff,0 0 110px #00eaff;
+    animation:speak .18s infinite alternate;
+    box-shadow:
+        0 0 35px #00eaff,
+        0 0 110px #00eaff;
 }
+
 @keyframes pulse{
- 50%{transform:scale(1.06)}
+    50%{transform:scale(1.06)}
 }
+
 @keyframes listen{
- to{transform:scale(1.13)}
+    to{transform:scale(1.13)}
 }
+
 @keyframes speak{
- to{transform:scale(1.2)}
+    to{transform:scale(1.2)}
 }
+
 @keyframes spin{
- to{transform:rotate(360deg)}
+    to{transform:rotate(360deg)}
 }
+
 .chat{
- width:min(900px,94%);
- flex:1;
- min-height:0;
- overflow-y:auto;
- padding:10px 5px 15px;
+    width:min(900px,94%);
+    flex:1;
+    min-height:0;
+    overflow-y:auto;
+    padding:10px 5px 15px;
 }
+
 .msg{
- padding:13px 16px;
- margin:9px 0;
- border:1px solid #073844;
- border-radius:12px;
- max-width:85%;
- line-height:1.5;
- white-space:pre-wrap;
+    max-width:85%;
+    margin:9px 0;
+    padding:13px 16px;
+    border:1px solid #073844;
+    border-radius:12px;
+    line-height:1.5;
+    white-space:pre-wrap;
 }
+
 .jarvis{
- background:rgba(0,234,255,.055);
- box-shadow:0 0 15px rgba(0,234,255,.05);
+    background:rgba(0,234,255,.055);
 }
+
 .user{
- margin-left:auto;
- color:#fff;
- background:rgba(255,255,255,.045);
- border-color:#25414a;
+    margin-left:auto;
+    color:white;
+    background:rgba(255,255,255,.045);
+    border-color:#25414a;
 }
+
 .label{
- font-size:10px;
- opacity:.6;
- margin-bottom:5px;
- letter-spacing:2px;
+    margin-bottom:5px;
+    font-size:10px;
+    letter-spacing:2px;
+    opacity:.6;
 }
+
 .controls{
- width:min(900px,94%);
- padding:12px 0 18px;
+    width:min(900px,94%);
+    padding:12px 0 18px;
 }
+
 .input-row{
- display:flex;
- gap:8px;
+    display:flex;
+    gap:8px;
 }
+
 input{
- flex:1;
- background:#06121a;
- color:#fff;
- border:1px solid #075061;
- border-radius:10px;
- padding:15px;
- outline:none;
- font-size:15px;
+    flex:1;
+    min-width:0;
+    padding:15px;
+    border:1px solid #075061;
+    border-radius:10px;
+    outline:none;
+    background:#06121a;
+    color:white;
+    font-size:15px;
 }
+
 input:focus{
- border-color:#00eaff;
- box-shadow:0 0 12px rgba(0,234,255,.25);
+    border-color:#00eaff;
+    box-shadow:0 0 12px rgba(0,234,255,.25);
 }
+
 button{
- border:1px solid #00eaff;
- background:#03151d;
- color:#00eaff;
- border-radius:10px;
- padding:0 16px;
- font-weight:bold;
- cursor:pointer;
+    border:1px solid #00eaff;
+    border-radius:10px;
+    padding:0 16px;
+    background:#03151d;
+    color:#00eaff;
+    font-weight:bold;
+    cursor:pointer;
 }
+
 button:hover{
- background:#00eaff;
- color:#001018;
- box-shadow:0 0 18px #00eaff;
+    background:#00eaff;
+    color:#001018;
+    box-shadow:0 0 18px #00eaff;
 }
+
 .mic{
- width:55px;
- font-size:20px;
+    width:55px;
+    font-size:20px;
 }
+
 .quick{
- display:flex;
- gap:7px;
- margin-top:9px;
- overflow-x:auto;
+    display:flex;
+    gap:7px;
+    margin-top:9px;
+    overflow-x:auto;
 }
+
 .quick button{
- padding:9px 12px;
- font-size:11px;
- white-space:nowrap;
+    padding:9px 12px;
+    font-size:11px;
+    white-space:nowrap;
 }
+
 @media(max-width:600px){
- header{height:60px}
- .logo{font-size:19px}
- .core-area{height:32%;min-height:230px}
- .core{width:115px;height:115px}
- .center{inset:28px}
- .msg{max-width:92%;font-size:14px}
- input{font-size:14px}
+    header{height:60px}
+    .logo{font-size:19px}
+    .core-area{
+        height:32%;
+        min-height:230px;
+    }
+    .core{
+        width:115px;
+        height:115px;
+    }
+    .center{inset:28px}
+    .msg{
+        max-width:92%;
+        font-size:14px;
+    }
 }
 </style>
 </head>
 
 <body>
+
 <div class="app">
 
 <header>
- <div class="logo">JARVIS</div>
- <div class="status" id="status">● ONLINE</div>
+    <div class="logo">JARVIS</div>
+    <div class="status" id="status">● ONLINE</div>
 </header>
 
 <div class="main">
 
-<div class="core-area" id="coreArea">
- <div class="core">
-  <div class="center"></div>
- </div>
+    <div class="core-area" id="coreArea">
+        <div class="core">
+            <div class="center"></div>
+        </div>
+    </div>
+
+    <div class="chat" id="chat">
+
+        <div class="msg jarvis">
+            <div class="label">JARVIS</div>
+            Hello. I am JARVIS.<br>
+            How can I assist you?
+        </div>
+
+    </div>
+
+    <div class="controls">
+
+        <div class="input-row">
+
+            <input
+                id="input"
+                placeholder="Ask JARVIS anything..."
+                autocomplete="off"
+            >
+
+            <button class="mic" id="mic">🎙️</button>
+
+            <button id="send">SEND</button>
+
+        </div>
+
+        <div class="quick">
+            <button onclick="ask('Who created you?')">CREATOR</button>
+            <button onclick="ask('Tell me a joke')">JOKE</button>
+            <button onclick="ask('What time is it?')">TIME</button>
+            <button onclick="ask('Open YouTube')">YOUTUBE</button>
+            <button onclick="ask('Open Google')">GOOGLE</button>
+        </div>
+
+    </div>
+
+</div>
 </div>
 
-<div class="chat" id="chat">
- <div class="msg jarvis">
-  <div class="label">JARVIS</div>
-  Hello. I am JARVIS.<br>
-  How can I assist you?
- </div>
-</div>
-
-<div class="controls">
- <div class="input-row">
-  <input id="input" placeholder="Ask JARVIS anything..." autocomplete="off">
-  <button class="mic" id="mic">🎙️</button>
-  <button id="send">SEND</button>
- </div>
-
- <div class="quick">
-  <button onclick="ask('What time is it?')">TIME</button>
-  <button onclick="ask('Tell me about Munkhtur')">CREATOR</button>
-  <button onclick="ask('Tell me a joke')">JOKE</button>
-  <button onclick="ask('Open YouTube')">YOUTUBE</button>
-  <button onclick="ask('Open Google')">GOOGLE</button>
- </div>
-</div>
-
-</div>
-</div>
 
 <script>
-const input=document.getElementById("input");
-const chat=document.getElementById("chat");
-const coreArea=document.getElementById("coreArea");
-const status=document.getElementById("status");
+
+const input = document.getElementById("input");
+const chat = document.getElementById("chat");
+const coreArea = document.getElementById("coreArea");
+const status = document.getElementById("status");
+
+
+/* MESSAGE */
 
 function addMessage(text,type){
- const box=document.createElement("div");
- box.className="msg "+type;
- box.innerHTML=
- `<div class="label">${type==="user"?"YOU":"JARVIS"}</div>`+
- text.replace(/\n/g,"<br>");
- chat.appendChild(box);
- chat.scrollTop=chat.scrollHeight;
+
+    const box = document.createElement("div");
+
+    box.className = "msg " + type;
+
+    const label = type === "user" ? "YOU" : "JARVIS";
+
+    box.innerHTML =
+        `<div class="label">${label}</div>` +
+        text.replace(/\n/g,"<br>");
+
+    chat.appendChild(box);
+
+    chat.scrollTop = chat.scrollHeight;
 }
+
+
+/* VOICE */
 
 function speak(text){
- if(!("speechSynthesis" in window)) return;
 
- speechSynthesis.cancel();
+    if(!("speechSynthesis" in window)){
+        return;
+    }
 
- const clean=text.replace(/[*#`]/g,"");
- const u=new SpeechSynthesisUtterance(clean);
+    speechSynthesis.cancel();
 
- u.lang="en-US";
- u.rate=.95;
- u.pitch=1;
- u.volume=1;
+    const clean = text
+        .replace(/[*#`]/g,"")
+        .replace(/<[^>]*>/g,"");
 
- u.onstart=()=>{
-   coreArea.classList.add("speaking");
-   status.textContent="● SPEAKING";
-   status.style.color="#00eaff";
- };
+    const voice = new SpeechSynthesisUtterance(clean);
 
- u.onend=()=>{
-   coreArea.classList.remove("speaking");
-   status.textContent="● ONLINE";
-   status.style.color="#65ffb5";
- };
+    voice.lang = "en-US";
+    voice.rate = 0.95;
+    voice.pitch = 1;
+    voice.volume = 1;
 
- speechSynthesis.speak(u);
+    voice.onstart = () => {
+
+        coreArea.classList.add("speaking");
+
+        status.textContent = "● SPEAKING";
+        status.style.color = "#00eaff";
+
+    };
+
+    voice.onend = () => {
+
+        coreArea.classList.remove("speaking");
+
+        status.textContent = "● ONLINE";
+        status.style.color = "#65ffb5";
+
+    };
+
+    speechSynthesis.speak(voice);
 }
+
+
+/* OPEN WEBSITE */
 
 function openSite(name,url){
- addMessage("Opening "+name+"...","jarvis");
- setTimeout(()=>location.href=url,300);
+
+    addMessage("Opening " + name + "...","jarvis");
+
+    setTimeout(() => {
+        window.location.href = url;
+    },300);
 }
+
+
+/* COMMAND SYSTEM */
 
 function localCommand(text){
- const t=text.toLowerCase().trim();
 
- if(t.includes("open youtube"))
-   return openSite("YouTube","https://www.youtube.com");
+    const t = text.toLowerCase().trim();
 
- if(t.includes("open google"))
-   return openSite("Google","https://www.google.com");
 
- if(t.includes("open facebook"))
-   return openSite("Facebook","https://www.facebook.com");
+    /* CREATOR COMMANDS */
 
- if(t.includes("open instagram"))
-   return openSite("Instagram","https://www.instagram.com");
+    if(
+        t.includes("who created you") ||
+        t.includes("who made you") ||
+        t.includes("who built you") ||
+        t.includes("who is your creator") ||
+        t.includes("who made jarvis") ||
+        t.includes("who created jarvis") ||
+        t.includes("who built jarvis") ||
+        t.includes("tell me about munkhtur") ||
+        t.includes("munkhtur") ||
+        t.includes("creator")
+    ){
 
- if(t.includes("open messenger"))
-   return openSite("Messenger","https://www.messenger.com");
+        const r =
+        "I was created and built by Munkhtur. " +
+        "He is the creator of this JARVIS project. " +
+        "He built it with creativity, ambition and a strong interest in technology.";
 
- if(t.includes("open roblox"))
-   return openSite("Roblox","https://www.roblox.com");
+        addMessage(r,"jarvis");
+        speak(r);
 
- if(t.includes("open tiktok"))
-   return openSite("TikTok","https://www.tiktok.com");
+        return true;
+    }
 
- if(t.includes("open spotify"))
-   return openSite("Spotify","https://open.spotify.com");
 
- if(t.includes("open minecraft"))
-   return openSite("Minecraft","https://www.minecraft.net");
+    /* WEBSITE COMMANDS */
 
- if(t.includes("time")){
-   const r="The current time is "+new Date().toLocaleTimeString();
-   addMessage(r,"jarvis");
-   speak(r);
-   return true;
- }
+    if(t.includes("open youtube")){
 
- if(t.includes("date")){
-   const r="Today is "+new Date().toLocaleDateString();
-   addMessage(r,"jarvis");
-   speak(r);
-   return true;
- }
+        openSite(
+            "YouTube",
+            "https://www.youtube.com"
+        );
 
- if(t.includes("joke")){
-   const jokes=[
-    "Why did the computer go to the doctor? Because it had a virus.",
-    "I told my computer I needed a break. Now it keeps sending me vacation ads.",
-    "Why was the math book sad? Because it had too many problems."
-   ];
-   const r=jokes[Math.floor(Math.random()*jokes.length)];
-   addMessage(r,"jarvis");
-   speak(r);
-   return true;
- }
+        return true;
+    }
 
- if(t.includes("munkhtur")||t.includes("creator")){
-   const r="Munkhtur is the creator of this JARVIS project. He built it with creativity, ambition and a strong interest in technology.";
-   addMessage(r,"jarvis");
-   speak(r);
-   return true;
- }
 
- return false;
+    if(t.includes("open google")){
+
+        openSite(
+            "Google",
+            "https://www.google.com"
+        );
+
+        return true;
+    }
+
+
+    if(t.includes("open facebook")){
+
+        openSite(
+            "Facebook",
+            "https://www.facebook.com"
+        );
+
+        return true;
+    }
+
+
+    if(t.includes("open instagram")){
+
+        openSite(
+            "Instagram",
+            "https://www.instagram.com"
+        );
+
+        return true;
+    }
+
+
+    if(t.includes("open messenger")){
+
+        openSite(
+            "Messenger",
+            "https://www.messenger.com"
+        );
+
+        return true;
+    }
+
+
+    if(t.includes("open roblox")){
+
+        openSite(
+            "Roblox",
+            "https://www.roblox.com"
+        );
+
+        return true;
+    }
+
+
+    if(t.includes("open tiktok")){
+
+        openSite(
+            "TikTok",
+            "https://www.tiktok.com"
+        );
+
+        return true;
+    }
+
+
+    if(t.includes("open spotify")){
+
+        openSite(
+            "Spotify",
+            "https://open.spotify.com"
+        );
+
+        return true;
+    }
+
+
+    if(t.includes("open minecraft")){
+
+        openSite(
+            "Minecraft",
+            "https://www.minecraft.net"
+        );
+
+        return true;
+    }
+
+
+    /* TIME */
+
+    if(
+        t.includes("what time is it") ||
+        t === "time" ||
+        t.includes("current time")
+    ){
+
+        const r =
+            "The current time is " +
+            new Date().toLocaleTimeString();
+
+        addMessage(r,"jarvis");
+        speak(r);
+
+        return true;
+    }
+
+
+    /* DATE */
+
+    if(
+        t.includes("what is the date") ||
+        t.includes("what's the date") ||
+        t === "date"
+    ){
+
+        const r =
+            "Today is " +
+            new Date().toLocaleDateString();
+
+        addMessage(r,"jarvis");
+        speak(r);
+
+        return true;
+    }
+
+
+    /* JOKES */
+
+    if(
+        t.includes("tell me a joke") ||
+        t.includes("tell joke") ||
+        t === "joke"
+    ){
+
+        const jokes = [
+
+            "Why did the computer go to the doctor? Because it had a virus.",
+
+            "I told my computer I needed a break. Now it keeps showing me vacation ads.",
+
+            "Why was the math book sad? Because it had too many problems.",
+
+            "Why did the programmer quit his job? Because he didn't get arrays."
+
+        ];
+
+        const r =
+            jokes[Math.floor(Math.random()*jokes.length)];
+
+        addMessage(r,"jarvis");
+        speak(r);
+
+        return true;
+    }
+
+
+    /* GREETINGS */
+
+    if(
+        t === "hello" ||
+        t === "hi" ||
+        t.includes("hello jarvis") ||
+        t.includes("hey jarvis")
+    ){
+
+        const r =
+            "Hello. I am JARVIS. How can I assist you?";
+
+        addMessage(r,"jarvis");
+        speak(r);
+
+        return true;
+    }
+
+
+    /* WHO ARE YOU */
+
+    if(
+        t.includes("who are you") ||
+        t.includes("what are you")
+    ){
+
+        const r =
+            "I am JARVIS, a futuristic AI assistant created by Munkhtur.";
+
+        addMessage(r,"jarvis");
+        speak(r);
+
+        return true;
+    }
+
+
+    return false;
 }
+
+
+/* ASK */
 
 function ask(text){
- input.value="";
- addMessage(text,"user");
 
- if(localCommand(text)) return;
+    input.value = "";
 
- const reply=
- "I can understand your command, but this public version does not have a cloud AI brain connected yet. "+
- "You can still use voice input, voice output, animations and website commands.";
+    addMessage(text,"user");
 
- setTimeout(()=>{
-   addMessage(reply,"jarvis");
-   speak(reply);
- },400);
+    if(localCommand(text)){
+        return;
+    }
+
+
+    const reply =
+        "I understand your question, but my full AI brain is not connected yet. " +
+        "You can still use my voice, microphone, animations and commands.";
+
+    setTimeout(() => {
+
+        addMessage(reply,"jarvis");
+
+        speak(reply);
+
+    },400);
 }
 
-document.getElementById("send").onclick=()=>{
- const text=input.value.trim();
- if(text) ask(text);
+
+/* SEND BUTTON */
+
+document.getElementById("send").onclick = () => {
+
+    const text = input.value.trim();
+
+    if(text){
+        ask(text);
+    }
+
 };
 
-input.addEventListener("keydown",e=>{
- if(e.key==="Enter"){
-  const text=input.value.trim();
-  if(text) ask(text);
- }
+
+/* ENTER KEY */
+
+input.addEventListener("keydown",e => {
+
+    if(e.key === "Enter"){
+
+        const text = input.value.trim();
+
+        if(text){
+            ask(text);
+        }
+
+    }
+
 });
+
 
 /* MICROPHONE */
 
-let recognition=null;
-let listening=false;
+let recognition = null;
+let listening = false;
 
-const SpeechRecognition=
- window.SpeechRecognition||
- window.webkitSpeechRecognition;
+const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
 
 if(SpeechRecognition){
 
- recognition=new SpeechRecognition();
- recognition.lang="en-US";
- recognition.continuous=false;
- recognition.interimResults=false;
+    recognition = new SpeechRecognition();
 
- recognition.onstart=()=>{
-  listening=true;
-  coreArea.classList.add("listening");
-  status.textContent="● LISTENING";
-  status.style.color="#00eaff";
- };
+    recognition.lang = "en-US";
 
- recognition.onresult=e=>{
-  const text=e.results[0][0].transcript;
-  input.value=text;
-  ask(text);
- };
+    recognition.continuous = false;
 
- recognition.onerror=e=>{
-  listening=false;
-  coreArea.classList.remove("listening");
-  status.textContent="● MIC ERROR";
-  status.style.color="#ff7070";
+    recognition.interimResults = false;
 
-  if(e.error==="not-allowed"){
-   addMessage("Microphone permission is blocked. Please allow microphone access in your browser settings.","jarvis");
-  }
- };
 
- recognition.onend=()=>{
-  listening=false;
-  coreArea.classList.remove("listening");
-  if(status.textContent!=="● MIC ERROR"){
-   status.textContent="● ONLINE";
-   status.style.color="#65ffb5";
-  }
- };
+    recognition.onstart = () => {
 
- document.getElementById("mic").onclick=()=>{
-  if(listening){
-   recognition.stop();
-   return;
-  }
+        listening = true;
 
-  try{
-   recognition.start();
-  }catch(e){}
- };
+        coreArea.classList.add("listening");
 
-}else{
+        status.textContent = "● LISTENING";
 
- document.getElementById("mic").onclick=()=>{
-  addMessage("Your browser does not support voice recognition. Try Google Chrome on Android.","jarvis");
- };
-}
+        status.style.color = "#00eaff";
 
-/* LOAD VOICES */
+    };
 
-if("speechSynthesis" in window){
- speechSynthesis.getVoices();
- speechSynthesis.onvoiceschanged=()=>{
-  speechSynthesis.getVoices();
- };
-}
-</script>
 
-</body>
-</html>
+    recognition.onresult = e => {
+
+        const text =
+            e.results[0][0].transcript;
+
+        input.value = text;
+
+        ask(text);
+
+    };
+
+
+    recognition.onerror = e => {
+
+        listening = false;
+
+        coreArea.classList.remove("listening");
+
+        status.textContent = "● MIC ERROR";
+
+        status.style.color = "#
