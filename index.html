@@ -1,41 +1,52 @@
-here<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>J.A.R.V.I.S</title>
+<meta name="theme-color" content="#02070a">
+<title>J.A.R.V.I.S — Munkhtur AI</title>
 
 <style>
-*{box-sizing:border-box}
-body{
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
   margin:0;
-  background:#020609;
+  min-height:100%;
+  background:#010406;
   color:#00eaff;
-  font-family:Arial,sans-serif;
-  text-align:center;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
   overflow-x:hidden;
+  background:
+    radial-gradient(circle at 50% 42%,rgba(0,234,255,.12),transparent 28%),
+    radial-gradient(circle at 20% 20%,rgba(0,120,255,.06),transparent 25%),
+    #010406;
 }
 
-header{
-  padding:25px 10px 5px;
-  font-size:32px;
-  font-weight:bold;
-  letter-spacing:7px;
-  text-shadow:0 0 20px #00eaff;
+/* GRID */
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.15;
+  background-image:
+    linear-gradient(rgba(0,234,255,.12) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,234,255,.12) 1px,transparent 1px);
+  background-size:35px 35px;
 }
 
-.status{
-  font-size:12px;
-  letter-spacing:3px;
-  opacity:.8;
-}
-
-.core{
-  width:230px;
-  height:230px;
-  margin:55px auto 30px;
-  border:3px solid #00eaff;
-  border-radius:50%;
-  box-shadow:
-    0 0 20px #00eaff,
-    0 0 60px #
+/* SCANLINE */
+body:after{
+  content:"";
+  position:fixed;
+  left:0;
+  right:0;
+  top:-20%;
+  height:2px;
+  background
