@@ -4,49 +4,736 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#02070a">
-<title>J.A.R.V.I.S — Munkhtur AI</title>
+<title>J.A.R.V.I.S | Munkhtur</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
-}
-
-html,body{
-  margin:0;
-  min-height:100%;
-  background:#010406;
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;min-height:100%;background:#020608}
+body{
   color:#00eaff;
   font-family:Arial,Helvetica,sans-serif;
-}
-
-body{
   overflow-x:hidden;
+  text-align:center;
   background:
-    radial-gradient(circle at 50% 42%,rgba(0,234,255,.12),transparent 28%),
-    radial-gradient(circle at 20% 20%,rgba(0,120,255,.06),transparent 25%),
-    #010406;
+    radial-gradient(circle at 50% 38%,#06323b 0%,#021217 22%,#020608 55%);
 }
-
-/* GRID */
 body:before{
   content:"";
   position:fixed;
   inset:0;
   pointer-events:none;
-  opacity:.15;
+  opacity:.14;
   background-image:
-    linear-gradient(rgba(0,234,255,.12) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,234,255,.12) 1px,transparent 1px);
-  background-size:35px 35px;
+    linear-gradient(#00eaff 1px,transparent 1px),
+    linear-gradient(90deg,#00eaff 1px,transparent 1px);
+  background-size:38px 38px;
 }
-
-/* SCANLINE */
-body:after{
-  content:"";
+.scan{
   position:fixed;
   left:0;
   right:0;
-  top:-20%;
+  top:-10px;
   height:2px;
-  background
+  background:#00eaff;
+  box-shadow:0 0 18px #00eaff;
+  opacity:.5;
+  animation:scan 4s linear infinite;
+  z-index:5;
+}
+@keyframes scan{to{top:110vh}}
+
+header{padding:24px 12px 8px}
+.logo{
+  font-size:clamp(30px,9vw,58px);
+  font-weight:900;
+  letter-spacing:7px;
+  text-shadow:0 0 8px #00eaff,0 0 28px #00eaff;
+}
+.sub{
+  margin-top:7px;
+  font-size:9px;
+  letter-spacing:4px;
+  opacity:.55;
+}
+.online{
+  margin-top:13px;
+  font-size:11px;
+  letter-spacing:2px;
+}
+.green{
+  display:inline-block;
+  width:7px;height:7px;
+  border-radius:50%;
+  background:#00ff9d;
+  box-shadow:0 0 14px #00ff9d;
+  margin-right:6px;
+}
+
+main{width:min(940px,100%);margin:auto;padding:0 15px 30px}
+
+.corebox{
+  width:min(82vw,430px);
+  aspect-ratio:1;
+  margin:5px auto 12px;
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.ring{
+  position:absolute;
+  border:2px solid rgba(0,234,255,.6);
+  border-radius:50%;
+}
+.a{inset:4%;border-style:dashed;animation:rot 14s linear infinite}
+.b{inset:12%;border-top-color:transparent;border-bottom-color:transparent;animation:rot2 7s linear infinite}
+.c{inset:21%;border-left-color:transparent;border-right-color:transparent;animation:rot 5s linear infinite}
+.d{inset:29%;border-color:rgba(0,234,255,.35);animation:rot2 9s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+@keyframes rot2{to{transform:rotate(-360deg)}}
+
+.core{
+  width:27%;
+  aspect-ratio:1;
+  border-radius:50%;
+  background:radial-gradient(circle,#fff 0 5%,#8fffff 12%,#00eaff 28%,#007cff 45%,transparent 70%);
+  box-shadow:0 0 15px #fff,0 0 35px #00eaff,0 0 85px #00eaff;
+  animation:pulse 1.7s ease-in-out infinite;
+}
+@keyframes pulse{
+  50%{transform:scale(1.14);filter:brightness(1.5)}
+}
+
+.label{
+  position:absolute;
+  font-size:8px;
+  letter-spacing:2px;
+  opacity:.65;
+}
+.l1{top:10%;left:4%}
+.l2{top:20%;right:2%}
+.l3{bottom:18%;left:2%}
+.l4{bottom:7%;right:4%}
+
+.panel{
+  border:1px solid rgba(0,234,255,.6);
+  border-radius:8px;
+  padding:16px;
+  background:rgba(0,15,20,.78);
+  box-shadow:0 0 30px rgba(0,234,255,.12),inset 0 0 25px rgba(0,234,255,.04);
+  backdrop-filter:blur(8px);
+}
+.title{
+  font-size:10px;
+  letter-spacing:3px;
+  opacity:.55;
+  margin-bottom:12px;
+}
+.output{
+  min-height:90px;
+  text-align:left;
+  padding:14px;
+  border-left:3px solid #00eaff;
+  background:rgba(0,234,255,.035);
+  color:#d9fbff;
+  font-size:14px;
+  line-height:1.6;
+}
+.cyan{color:#00eaff}
+
+.command{
+  display:flex;
+  gap:7px;
+  margin-top:12px;
+}
+input{
+  flex:1;
+  min-width:0;
+  border:1px solid rgba(0,234,255,.55);
+  border-radius:5px;
+  outline:none;
+  background:#01090c;
+  color:#00eaff;
+  padding:13px;
+  font-size:14px;
+}
+input:focus{box-shadow:0 0 18px rgba(0,234,255,.2)}
+button{
+  border:1px solid #00eaff;
+  border-radius:5px;
+  background:rgba(0,234,255,.04);
+  color:#00eaff;
+  padding:11px 14px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.2s;
+}
+button:hover,button:active{
+  background:#00eaff;
+  color:#001014;
+  box-shadow:0 0 22px #00eaff;
+}
+.mic{font-size:17px}
+
+.buttons{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+  margin-top:10px;
+}
+.buttons button{font-size:10px;letter-spacing:1px}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+  margin-top:10px;
+}
+.stat{
+  padding:12px 5px;
+  border:1px solid rgba(0,234,255,.25);
+  background:rgba(0,234,255,.025);
+}
+.stat b{display:block;font-size:14px}
+.stat span{font-size:8px;letter-spacing:1px;opacity:.5}
+
+footer{
+  padding:18px 10px 30px;
+  font-size:8px;
+  letter-spacing:3px;
+  opacity:.4;
+}
+
+@media(max-width:600px){
+  .logo{letter-spacing:5px}
+  .panel{padding:12px}
+  .buttons{grid-template-columns:repeat(2,1fr)}
+  .command{gap:5px}
+  button{padding:11px 10px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="scan"></div>
+
+<header>
+  <div class="logo">J.A.R.V.I.S</div>
+  <div class="sub">JUST A RATHER VERY INTELLIGENT SYSTEM</div>
+  <div class="online"><span class="green"></span>SYSTEM ONLINE</div>
+</header>
+
+<main>
+
+<div class="corebox">
+  <div class="ring a"></div>
+  <div class="ring b"></div>
+  <div class="ring c"></div>
+  <div class="ring d"></div>
+  <div class="core"></div>
+
+  <div class="label l1">ARC-CORE 01</div>
+  <div class="label l2">NEURAL LINK</div>
+  <div class="label l3">SECURE SYSTEM</div>
+  <div class="label l4">ONLINE</div>
+</div>
+
+<div class="panel">
+
+<div class="title">JARVIS COMMAND TERMINAL</div>
+
+<div class="output" id="output">
+<span class="cyan">JARVIS:</span>
+Welcome, Munkhtur. All systems are online. I am ready to assist you.
+</div>
+
+<div class="command">
+<input id="command" type="text" placeholder="Type a command...">
+<button onclick="run()">SEND</button>
+<button class="mic" onclick="listen()">🎙</button>
+</div>
+
+<div class="buttons">
+<button onclick="activate()">ACTIVATE</button>
+<button onclick="time()">TIME</button>
+<button onclick="status()">SYSTEM</button>
+<button onclick="about()">ABOUT</button>
+</div>
+
+<div class="stats">
+<div class="stat"><b>100%</b><span>CORE</span></div>
+<div class="stat"><b>ONLINE</b><span>NETWORK</span></div>
+<div class="stat"><b>READY</b><span>STATUS</span></div>
+</div>
+
+</div>
+</main>
+
+<footer>CREATED BY MUNKHTUR • J.A.R.V.I.S v5.0</footer>
+
+<script>
+const output=document.getElementById("output");
+const input=document.getElementById("command");
+
+function speak(text){
+  if(!("speechSynthesis" in window))return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang="en-US";
+  u.rate=.9;
+  u.pitch=.75;
+  speechSynthesis.speak(u);
+}
+
+function show(text){
+  output.innerHTML='<span class="cyan">JARVIS:</span> '+text;
+  speak(text);
+}
+
+function activate(){
+  show("Hello, Munkhtur. I am JARVIS, your personal artificial intelligence assistant. All systems are online and ready.");
+}
+
+function time(){
+  const t=new Date().toLocaleTimeString();
+  show("The current time is "+t+".");
+}
+
+function status(){
+  show("System diagnostics complete. Core online. Neural interface ready. All primary systems are operational.");
+}
+
+function about(){
+  show("I am JARVIS, a futuristic personal assistant interface created by Munkhtur.");
+}
+
+function run(){
+  const c=input.value.trim().toLowerCase();
+  if(!c){
+    show("Please enter a command.");
+    return;
+  }
+
+  input.value="";
+
+  if(c.includes("hello")||c.includes("hi")){
+    show("Hello, Munkhtur. How can I assist you?");
+  }else if(c.includes("time")){
+    time();
+  }else if(c.includes("system")||c.includes("status")){
+    status();
+  }else if(c.includes("who are you")||c.includes("about")){
+    about();
+  }else if(c.includes("thank")){
+    show("You're welcome, Munkhtur.");
+  }else{
+    show("Command received: "+c+". Local assistant mode is active.");
+  }
+}
+
+input.addEventListener("keydown",function(e){
+  if(e.key==="Ente<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#02070a">
+<title>J.A.R.V.I.S | Munkhtur</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;min-height:100%;background:#020608}
+body{
+  color:#00eaff;
+  font-family:Arial,Helvetica,sans-serif;
+  overflow-x:hidden;
+  text-align:center;
+  background:
+    radial-gradient(circle at 50% 38%,#06323b 0%,#021217 22%,#020608 55%);
+}
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.14;
+  background-image:
+    linear-gradient(#00eaff 1px,transparent 1px),
+    linear-gradient(90deg,#00eaff 1px,transparent 1px);
+  background-size:38px 38px;
+}
+.scan{
+  position:fixed;
+  left:0;
+  right:0;
+  top:-10px;
+  height:2px;
+  background:#00eaff;
+  box-shadow:0 0 18px #00eaff;
+  opacity:.5;
+  animation:scan 4s linear infinite;
+  z-index:5;
+}
+@keyframes scan{to{top:110vh}}
+
+header{padding:24px 12px 8px}
+.logo{
+  font-size:clamp(30px,9vw,58px);
+  font-weight:900;
+  letter-spacing:7px;
+  text-shadow:0 0 8px #00eaff,0 0 28px #00eaff;
+}
+.sub{
+  margin-top:7px;
+  font-size:9px;
+  letter-spacing:4px;
+  opacity:.55;
+}
+.online{
+  margin-top:13px;
+  font-size:11px;
+  letter-spacing:2px;
+}
+.green{
+  display:inline-block;
+  width:7px;height:7px;
+  border-radius:50%;
+  background:#00ff9d;
+  box-shadow:0 0 14px #00ff9d;
+  margin-right:6px;
+}
+
+main{width:min(940px,100%);margin:auto;padding:0 15px 30px}
+
+.corebox{
+  width:min(82vw,430px);
+  aspect-ratio:1;
+  margin:5px auto 12px;
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.ring{
+  position:absolute;
+  border:2px solid rgba(0,234,255,.6);
+  border-radius:50%;
+}
+.a{inset:4%;border-style:dashed;animation:rot 14s linear infinite}
+.b{inset:12%;border-top-color:transparent;border-bottom-color:transparent;animation:rot2 7s linear infinite}
+.c{inset:21%;border-left-color:transparent;border-right-color:transparent;animation:rot 5s linear infinite}
+.d{inset:29%;border-color:rgba(0,234,255,.35);animation:rot2 9s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+@keyframes rot2{to{transform:rotate(-360deg)}}
+
+.core{
+  width:27%;
+  aspect-ratio:1;
+  border-radius:50%;
+  background:radial-gradient(circle,#fff 0 5%,#8fffff 12%,#00eaff 28%,#007cff 45%,transparent 70%);
+  box-shadow:0 0 15px #fff,0 0 35px #00eaff,0 0 85px #00eaff;
+  animation:pulse 1.7s ease-in-out infinite;
+}
+@keyframes pulse{
+  50%{transform:scale(1.14);filter:brightness(1.5)}
+}
+
+.label{
+  position:absolute;
+  font-size:8px;
+  letter-spacing:2px;
+  opacity:.65;
+}
+.l1{top:10%;left:4%}
+.l2{top:20%;right:2%}
+.l3{bottom:18%;left:2%}
+.l4{bottom:7%;right:4%}
+
+.panel{
+  border:1px solid rgba(0,234,255,.6);
+  border-radius:8px;
+  padding:16px;
+  background:rgba(0,15,20,.78);
+  box-shadow:0 0 30px rgba(0,234,255,.12),inset 0 0 25px rgba(0,234,255,.04);
+  backdrop-filter:blur(8px);
+}
+.title{
+  font-size:10px;
+  letter-spacing:3px;
+  opacity:.55;
+  margin-bottom:12px;
+}
+.output{
+  min-height:90px;
+  text-align:left;
+  padding:14px;
+  border-left:3px solid #00eaff;
+  background:rgba(0,234,255,.035);
+  color:#d9fbff;
+  font-size:14px;
+  line-height:1.6;
+}
+.cyan{color:#00eaff}
+
+.command{
+  display:flex;
+  gap:7px;
+  margin-top:12px;
+}
+input{
+  flex:1;
+  min-width:0;
+  border:1px solid rgba(0,234,255,.55);
+  border-radius:5px;
+  outline:none;
+  background:#01090c;
+  color:#00eaff;
+  padding:13px;
+  font-size:14px;
+}
+input:focus{box-shadow:0 0 18px rgba(0,234,255,.2)}
+button{
+  border:1px solid #00eaff;
+  border-radius:5px;
+  background:rgba(0,234,255,.04);
+  color:#00eaff;
+  padding:11px 14px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.2s;
+}
+button:hover,button:active{
+  background:#00eaff;
+  color:#001014;
+  box-shadow:0 0 22px #00eaff;
+}
+.mic{font-size:17px}
+
+.buttons{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+  margin-top:10px;
+}
+.buttons button{font-size:10px;letter-spacing:1px}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+  margin-top:10px;
+}
+.stat{
+  padding:12px 5px;
+  border:1px solid rgba(0,234,255,.25);
+  background:rgba(0,234,255,.025);
+}
+.stat b{display:block;font-size:14px}
+.stat span{font-size:8px;letter-spacing:1px;opacity:.5}
+
+footer{
+  padding:18px 10px 30px;
+  font-size:8px;
+  letter-spacing:3px;
+  opacity:.4;
+}
+
+@media(max-width:600px){
+  .logo{letter-spacing:5px}
+  .panel{padding:12px}
+  .buttons{grid-template-columns:repeat(2,1fr)}
+  .command{gap:5px}
+  button{padding:11px 10px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="scan"></div>
+
+<header>
+  <div class="logo">J.A.R.V.I.S</div>
+  <div class="sub">JUST A RATHER VERY INTELLIGENT SYSTEM</div>
+  <div class="online"><span class="green"></span>SYSTEM ONLINE</div>
+</header>
+
+<main>
+
+<div class="corebox">
+  <div class="ring a"></div>
+  <div class="ring b"></div>
+  <div class="ring c"></div>
+  <div class="ring d"></div>
+  <div class="core"></div>
+
+  <div class="label l1">ARC-CORE 01</div>
+  <div class="label l2">NEURAL LINK</div>
+  <div class="label l3">SECURE SYSTEM</div>
+  <div class="label l4">ONLINE</div>
+</div>
+
+<div class="panel">
+
+<div class="title">JARVIS COMMAND TERMINAL</div>
+
+<div class="output" id="output">
+<span class="cyan">JARVIS:</span>
+Welcome, Munkhtur. All systems are online. I am ready to assist you.
+</div>
+
+<div class="command">
+<input id="command" type="text" placeholder="Type a command...">
+<button onclick="run()">SEND</button>
+<button class="mic" onclick="listen()">🎙</button>
+</div>
+
+<div class="buttons">
+<button onclick="activate()">ACTIVATE</button>
+<button onclick="time()">TIME</button>
+<button onclick="status()">SYSTEM</button>
+<button onclick="about()">ABOUT</button>
+</div>
+
+<div class="stats">
+<div class="stat"><b>100%</b><span>CORE</span></div>
+<div class="stat"><b>ONLINE</b><span>NETWORK</span></div>
+<div class="stat"><b>READY</b><span>STATUS</span></div>
+</div>
+
+</div>
+</main>
+
+<footer>CREATED BY MUNKHTUR • J.A.R.V.I.S v5.0</footer>
+
+<script>
+const output=document.getElementById("output");
+const input=document.getElementById("command");
+
+function speak(text){
+  if(!("speechSynthesis" in window))return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang="en-US";
+  u.rate=.9;
+  u.pitch=.75;
+  speechSynthesis.speak(u);
+}
+
+function show(text){
+  output.innerHTML='<span class="cyan">JARVIS:</span> '+text;
+  speak(text);
+}
+
+function activate(){
+  show("Hello, Munkhtur. I am JARVIS, your personal artificial intelligence assistant. All systems are online and ready.");
+}
+
+function time(){
+  const t=new Date().toLocaleTimeString();
+  show("The current time is "+t+".");
+}
+
+function status(){
+  show("System diagnostics complete. Core online. Neural interface ready. All primary systems are operational.");
+}
+
+function about(){
+  show("I am JARVIS, a futuristic personal assistant interface created by Munkhtur.");
+}
+
+function run(){
+  const c=input.value.trim().toLowerCase();
+  if(!c){
+    show("Please enter a command.");
+    return;
+  }
+
+  input.value="";
+
+  if(c.includes("hello")||c.includes("hi")){
+    show("Hello, Munkhtur. How can I assist you?");
+  }else if(c.includes("time")){
+    time();
+  }else if(c.includes("system")||c.includes("status")){
+    status();
+  }else if(c.includes("who are you")||c.includes("about")){
+    about();
+  }else if(c.includes("thank")){
+    show("You're welcome, Munkhtur.");
+  }else{
+    show("Command received: "+c+". Local assistant mode is active.");
+  }
+}
+
+input.addEventListener("keydown",function(e){
+  if(e.key==="Enter")run();
+});
+
+function listen(){
+
+  const Recognition=
+    window.SpeechRecognition||
+    window.webkitSpeechRecognition;
+
+  if(!Recognition){
+    show("Voice recognition is not supported by this browser.");
+    return;
+  }
+
+  const r=new Recognition();
+  r.lang="en-US";
+  r.interimResults=false;
+
+  output.innerHTML='<span class="cyan">JARVIS:</span> Listening...';
+
+  r.start();
+
+  r.onresult=function(e){
+    input.value=e.results[0][0].transcript;
+    run();
+  };
+
+  r.onerror=function(){
+    show("I could not hear you. Please try again.");
+  };
+}
+</script>
+
+</body>
+</html>r")run();
+});
+
+function listen(){
+
+  const Recognition=
+    window.SpeechRecognition||
+    window.webkitSpeechRecognition;
+
+  if(!Recognition){
+    show("Voice recognition is not supported by this browser.");
+    return;
+  }
+
+  const r=new Recognition();
+  r.lang="en-US";
+  r.interimResults=false;
+
+  output.innerHTML='<span class="cyan">JARVIS:</span> Listening...';
+
+  r.start();
+
+  r.onresult=function(e){
+    input.value=e.results[0][0].transcript;
+    run();
+  };
+
+  r.onerror=function(){
+    show("I could not hear you. Please try again.");
+  };
+}
+</script>
+
+</body>
+</html>
