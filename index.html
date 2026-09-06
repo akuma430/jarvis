@@ -2,214 +2,372 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JARVIS AI</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>JARVIS • Munkhtur AI</title>
 
 <style>
 *{box-sizing:border-box}
 
+:root{
+  --cyan:#00eaff;
+  --blue:#008cff;
+  --green:#00ff9d;
+  --bg:#02060b;
+  --panel:rgba(3,18,29,.72);
+}
+
+html,body{
+  margin:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:var(--bg);
+  color:var(--cyan);
+  font-family:Arial,Helvetica,sans-serif;
+}
+
 body{
-    margin:0;
-    background:#02070b;
-    color:#00eaff;
-    font-family:Arial,sans-serif;
-    min-height:100vh;
-    overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 35%,rgba(0,234,255,.12),transparent 30%),
+    radial-gradient(circle at 50% 100%,rgba(0,100,255,.08),transparent 40%),
+    #02060b;
 }
 
 body:before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:
-      linear-gradient(rgba(0,234,255,.035) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(0,234,255,.035) 1px,transparent 1px);
-    background-size:35px 35px;
-    pointer-events:none;
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(rgba(0,234,255,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,234,255,.035) 1px,transparent 1px);
+  background-size:34px 34px;
+  mask-image:linear-gradient(to bottom,black,transparent);
+}
+
+body:after{
+  content:"";
+  position:fixed;
+  left:0;
+  right:0;
+  height:2px;
+  background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+  opacity:.18;
+  animation:scan 5s linear infinite;
+  pointer-events:none;
+}
+
+@keyframes scan{
+  0%{top:-5%}
+  100%{top:105%}
 }
 
 .app{
-    width:100%;
-    max-width:900px;
-    height:100vh;
-    margin:auto;
-    display:flex;
-    flex-direction:column;
-    padding:18px;
+  width:100%;
+  max-width:1000px;
+  height:100vh;
+  margin:auto;
+  padding:14px;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  z-index:1;
 }
 
-.header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:1px solid #075b68;
-    padding-bottom:14px;
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 4px 13px;
+  border-bottom:1px solid rgba(0,234,255,.3);
 }
 
 .logo{
-    font-size:26px;
-    font-weight:bold;
-    letter-spacing:6px;
-    text-shadow:0 0 15px #00eaff;
+  font-size:28px;
+  font-weight:900;
+  letter-spacing:7px;
+  text-shadow:
+    0 0 5px var(--cyan),
+    0 0 20px var(--cyan),
+    0 0 45px var(--blue);
+}
+
+.sub{
+  font-size:9px;
+  opacity:.55;
+  letter-spacing:3px;
+  margin-top:4px;
 }
 
 .status{
-    font-size:12px;
-    letter-spacing:2px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-size:10px;
+  letter-spacing:2px;
 }
 
 .dot{
-    display:inline-block;
-    width:9px;
-    height:9px;
-    background:#00ff88;
-    border-radius:50%;
-    box-shadow:0 0 12px #00ff88;
-    margin-right:7px;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 12px var(--green);
 }
 
-.core-area{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:280px;
+.hero{
+  height:300px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
 }
 
 .core{
-    width:145px;
-    height:145px;
-    border:2px solid #00eaff;
-    border-radius:50%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    position:relative;
-    box-shadow:0 0 25px #00eaff, inset 0 0 30px #00eaff;
-    animation:pulse 2s infinite;
-}
-
-.core:before,
-.core:after{
-    content:"";
-    position:absolute;
-    border:1px solid #00eaff;
-    border-radius:50%;
+  width:130px;
+  height:130px;
+  border-radius:50%;
+  border:2px solid var(--cyan);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  box-shadow:
+    0 0 15px var(--cyan),
+    0 0 45px rgba(0,234,255,.35),
+    inset 0 0 35px rgba(0,234,255,.3);
+  animation:pulse 2.5s infinite;
 }
 
 .core:before{
-    width:190px;
-    height:190px;
-    animation:spin 8s linear infinite;
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  border:1px dashed rgba(0,234,255,.7);
+  animation:spin 8s linear infinite;
 }
 
 .core:after{
-    width:115px;
-    height:115px;
-    animation:spin 5s linear reverse infinite;
+  content:"";
+  position:absolute;
+  width:220px;
+  height:220px;
+  border-radius:50%;
+  border:1px solid rgba(0,140,255,.35);
+  border-left-color:transparent;
+  border-right-color:transparent;
+  animation:spin 12s linear reverse infinite;
 }
 
-.core span{
-    font-size:18px;
-    font-weight:bold;
-    letter-spacing:3px;
+.coreText{
+  text-align:center;
+  z-index:2;
+}
+
+.coreText b{
+  display:block;
+  font-size:19px;
+  letter-spacing:4px;
+}
+
+.coreText span{
+  display:block;
+  margin-top:5px;
+  font-size:8px;
+  letter-spacing:2px;
+  opacity:.7;
+}
+
+.orbit{
+  position:absolute;
+  width:255px;
+  height:255px;
+  border-radius:50%;
+  border:1px solid rgba(0,234,255,.12);
+  transform:rotate(25deg);
+}
+
+.orbit i{
+  position:absolute;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--cyan);
+  box-shadow:0 0 15px var(--cyan);
+  top:10px;
+  left:50%;
 }
 
 @keyframes pulse{
-    50%{transform:scale(1.06)}
+  50%{
+    transform:scale(1.06);
+    box-shadow:
+      0 0 25px var(--cyan),
+      0 0 65px rgba(0,234,255,.45),
+      inset 0 0 45px rgba(0,234,255,.4);
+  }
 }
 
 @keyframes spin{
-    to{transform:rotate(360deg)}
+  to{transform:rotate(360deg)}
+}
+
+.panel{
+  flex:1;
+  min-height:0;
+  border:1px solid rgba(0,234,255,.3);
+  border-radius:14px;
+  background:var(--panel);
+  backdrop-filter:blur(12px);
+  box-shadow:
+    0 0 30px rgba(0,234,255,.05),
+    inset 0 0 30px rgba(0,234,255,.025);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+
+.panelTop{
+  padding:10px 13px;
+  border-bottom:1px solid rgba(0,234,255,.15);
+  font-size:9px;
+  letter-spacing:2px;
+  opacity:.7;
 }
 
 .chat{
-    flex:1;
-    min-height:0;
-    border:1px solid #075b68;
-    background:rgba(0,20,27,.55);
-    box-shadow:inset 0 0 25px rgba(0,234,255,.04);
-    overflow-y:auto;
-    padding:15px;
-    border-radius:10px;
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  padding:13px;
+  scroll-behavior:smooth;
 }
+
+.chat::-webkit-scrollbar{width:4px}
+.chat::-webkit-scrollbar-thumb{background:var(--cyan)}
 
 .msg{
-    margin:10px 0;
-    line-height:1.5;
+  max-width:90%;
+  margin:9px 0;
+  padding:10px 12px;
+  border-radius:9px;
+  line-height:1.5;
+  font-size:14px;
+  animation:appear .25s ease;
 }
 
-.user{
-    color:#fff;
+@keyframes appear{
+  from{opacity:0;transform:translateY(6px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
 .jarvis{
-    color:#00eaff;
+  color:var(--cyan);
+  background:rgba(0,234,255,.045);
+  border-left:2px solid var(--cyan);
+}
+
+.you{
+  margin-left:auto;
+  color:white;
+  background:rgba(255,255,255,.045);
+  border-right:2px solid white;
 }
 
 .label{
-    font-weight:bold;
-    letter-spacing:2px;
+  font-size:9px;
+  font-weight:bold;
+  letter-spacing:2px;
+  display:block;
+  margin-bottom:3px;
+  opacity:.65;
 }
 
 .controls{
-    display:flex;
-    gap:8px;
-    margin-top:12px;
+  display:flex;
+  gap:7px;
+  padding:10px;
+  border-top:1px solid rgba(0,234,255,.15);
 }
 
 input{
-    flex:1;
-    min-width:0;
-    background:#020b10;
-    border:1px solid #087487;
-    color:#fff;
-    padding:14px;
-    border-radius:7px;
-    outline:none;
-    font-size:15px;
+  flex:1;
+  min-width:0;
+  border:1px solid rgba(0,234,255,.45);
+  background:rgba(0,8,14,.9);
+  color:white;
+  outline:none;
+  border-radius:8px;
+  padding:13px;
+  font-size:14px;
+}
+
+input:focus{
+  border-color:var(--cyan);
+  box-shadow:0 0 15px rgba(0,234,255,.15);
 }
 
 button{
-    background:#03151b;
-    color:#00eaff;
-    border:1px solid #00a8bd;
-    padding:12px 16px;
-    border-radius:7px;
-    cursor:pointer;
-    font-weight:bold;
+  border:1px solid rgba(0,234,255,.55);
+  background:rgba(0,25,35,.8);
+  color:var(--cyan);
+  border-radius:8px;
+  padding:0 15px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.2s;
 }
 
 button:hover{
-    background:#06313a;
-    box-shadow:0 0 12px #00eaff;
+  background:rgba(0,234,255,.12);
+  box-shadow:0 0 16px rgba(0,234,255,.3);
+}
+
+button:active{
+  transform:scale(.94);
 }
 
 .mic{
-    min-width:55px;
+  font-size:19px;
+  width:55px;
 }
 
-.footer{
-    text-align:center;
-    font-size:10px;
-    opacity:.55;
-    padding-top:10px;
-    letter-spacing:2px;
+.quick{
+  display:flex;
+  gap:6px;
+  padding:0 10px 10px;
+  overflow-x:auto;
+}
+
+.quick button{
+  white-space:nowrap;
+  font-size:10px;
+  padding:8px 10px;
+}
+
+footer{
+  text-align:center;
+  font-size:8px;
+  letter-spacing:3px;
+  opacity:.4;
+  padding:7px;
 }
 
 .listening{
-    animation:pulse .7s infinite;
-    color:#00ff88;
+  color:var(--green)!important;
+  text-shadow:0 0 15px var(--green);
 }
 
 @media(max-width:600px){
-    .logo{font-size:20px}
-    .core-area{height:230px}
-    .core{width:120px;height:120px}
-    .core:before{width:160px;height:160px}
-    .core:after{width:95px;height:95px}
-    .controls{flex-wrap:wrap}
-    input{flex-basis:100%}
-    button{flex:1}
+  .logo{font-size:21px}
+  .hero{height:235px}
+  .core{width:110px;height:110px}
+  .core:before{width:150px;height:150px}
+  .core:after{width:185px;height:185px}
+  .orbit{width:215px;height:215px}
+  button.send{padding:0 12px}
 }
 </style>
 </head>
@@ -218,274 +376,56 @@ button:hover{
 
 <div class="app">
 
-    <div class="header">
-        <div class="logo">JARVIS</div>
-        <div class="status">
-            <span class="dot"></span>
-            <span id="status">ONLINE</span>
-        </div>
-    </div>
+<header>
+  <div>
+    <div class="logo">JARVIS</div>
+    <div class="sub">PERSONAL INTELLIGENCE SYSTEM</div>
+  </div>
 
-    <div class="core-area">
-        <div class="core" id="core">
-            <span>JARVIS</span>
-        </div>
-    </div>
+  <div class="status">
+    <span class="dot"></span>
+    <span id="status">ONLINE</span>
+  </div>
+</header>
 
-    <div class="chat" id="chat">
-        <div class="msg jarvis">
-            <span class="label">JARVIS:</span>
-            System online. Awaiting your command.
-        </div>
-    </div>
+<div class="hero">
+  <div class="orbit"><i></i></div>
 
-    <div class="controls">
-        <input id="input" placeholder="Speak or type a command...">
-        <button onclick="send()">SEND</button>
-        <button class="mic" onclick="listen()">🎙️</button>
+  <div class="core" id="core">
+    <div class="coreText">
+      <b>JARVIS</b>
+      <span id="coreStatus">READY</span>
     </div>
-
-    <div class="footer">
-        JARVIS PERSONAL AI SYSTEM
-    </div>
-
+  </div>
 </div>
 
-<script>
-
-const chat = document.getElementById("chat");
-const input = document.getElementById("input");
-const status = document.getElementById("status");
-const core = document.getElementById("core");
-
-function addMessage(type,text){
-
-    const div = document.createElement("div");
-
-    div.className = "msg " + type;
-
-    div.innerHTML =
-        '<span class="label">' +
-        (type === "user" ? "YOU:" : "JARVIS:") +
-        '</span> ' +
-        escapeHTML(text);
-
-    chat.appendChild(div);
-
-    chat.scrollTop = chat.scrollHeight;
-}
-
-function escapeHTML(text){
-
-    return text
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-}
-
-function speak(text){
-
-    if(!("speechSynthesis" in window)) return;
-
-    speechSynthesis.cancel();
-
-    const voice = new SpeechSynthesisUtterance(text);
-
-    voice.lang = "en-US";
-    voice.rate = 0.95;
-    voice.pitch = 0.9;
-    voice.volume = 1;
-
-    speechSynthesis.speak(voice);
-}
-
-function reply(text){
-
-    addMessage("jarvis",text);
-    speak(text);
-}
-
-function send(){
-
-    const text = input.value.trim();
-
-    if(!text) return;
-
-    addMessage("user",text);
-
-    input.value = "";
-
-    process(text.toLowerCase());
-}
-
-function process(command){
-
-    if(command.includes("hello") ||
-       command.includes("hi") ||
-       command.includes("hey")){
-
-        reply("Hello. I am JARVIS. How can I assist you?");
-        return;
-    }
-
-    if(command.includes("who are you") ||
-       command.includes("what are you")){
-
-        reply("I am JARVIS, your personal artificial intelligence assistant.");
-        return;
-    }
-
-    if(command.includes("time")){
-
-        const time = new Date().toLocaleTimeString(
-            [],
-            {hour:"2-digit",minute:"2-digit"}
-        );
-
-        reply("The current time is " + time + ".");
-        return;
-    }
-
-    if(command.includes("date")){
-
-        const date = new Date().toLocaleDateString(
-            [],
-            {year:"numeric",month:"long",day:"numeric"}
-        );
-
-        reply("Today is " + date + ".");
-        return;
-    }
-
-    if(command.includes("google")){
-
-        reply("Opening Google.");
-
-        setTimeout(()=>{
-            window.open("https://www.google.com","_blank");
-        },500);
-
-        return;
-    }
-
-    if(command.includes("youtube")){
-
-        reply("Opening YouTube.");
-
-        setTimeout(()=>{
-            window.open("https://www.youtube.com","_blank");
-        },500);
-
-        return;
-    }
-
-    if(command.includes("thank")){
-
-        reply("You're welcome.");
-        return;
-    }
-
-    if(command.includes("clear")){
-
-        chat.innerHTML = "";
-        reply("Terminal cleared.");
-        return;
-    }
-
-    reply(
-        "I heard you say: " +
-        command +
-        ". My advanced AI brain is not connected yet."
-    );
-}
-
-const Recognition =
-    window.SpeechRecognition ||
-    window.webkitSpeechRecognition;
-
-let recognition = null;
-
-if(Recognition){
-
-    recognition = new Recognition();
-
-    recognition.lang = "en-US";
-    recognition.continuous = false;
-    recognition.interimResults = false;
-
-    recognition.onstart = function(){
-
-        status.textContent = "LISTENING";
-        status.classList.add("listening");
-        core.style.transform = "scale(1.12)";
-    };
-
-    recognition.onresult = function(event){
-
-        const text =
-            event.results[0][0].transcript;
-
-        input.value = text;
-
-        addMessage("user",text);
-
-        process(text.toLowerCase());
-    };
-
-    recognition.onerror = function(){
-
-        status.textContent = "MIC ERROR";
-        status.classList.remove("listening");
-
-        reply(
-            "I could not access the microphone. Please check microphone permission."
-        );
-    };
-
-    recognition.onend = function(){
-
-        status.textContent = "ONLINE";
-        status.classList.remove("listening");
-        core.style.transform = "";
-    };
-
-}
-
-function listen(){
-
-    if(!recognition){
-
-        reply(
-            "Voice recognition is not supported by this browser."
-        );
-
-        return;
-    }
-
-    try{
-
-        recognition.start();
-
-    }catch(error){
-
-        recognition.stop();
-
-    }
-}
-
-input.addEventListener("keydown",function(event){
-
-    if(event.key === "Enter"){
-
-        send();
-
-    }
-
-});
-
-</script>
-
-</body>
-</html>
+<div class="panel">
+
+  <div class="panelTop">
+    SECURE LOCAL COMMAND TERMINAL • MUNKHTUR EDITION
+  </div>
+
+  <div class="chat" id="chat">
+
+    <div class="msg jarvis">
+      <span class="label">JARVIS</span>
+      System online. Hello, Munkhtur. I am ready.
+    </div>
+
+  </div>
+
+  <div class="quick">
+    <button onclick="quick('Tell me a joke')">😂 JOKE</button>
+    <button onclick="quick('Who created you?')">👤 CREATOR</button>
+    <button onclick="quick('What time is it?')">🕐 TIME</button>
+    <button onclick="quick('Open Facebook')">FACEBOOK</button>
+    <button onclick="quick('Open Instagram')">INSTAGRAM</button>
+    <button onclick="quick('Open Messenger')">MESSENGER</button>
+    <button onclick="quick('Open Roblox')">ROBLOX</button>
+    <button onclick="quick('Open Standoff 2')">STANDOFF 2</button>
+  </div>
+
+  <div class="controls">
+    <input id="input" placeholder="Talk to JARVIS..." autocomplete="off">
+    <button class="mic" id="mic" onclick="listen()">🎙️</button>
+    <button class="
