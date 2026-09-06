@@ -2,135 +2,220 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="theme-color" content="#02070a">
 <title>J.A.R.V.I.S | Munkhtur</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{width:100%;min-height:100%;background:#020608}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,body{
+  width:100%;
+  min-height:100%;
+}
+
 body{
+  background:#02070a;
   color:#00eaff;
   font-family:Arial,Helvetica,sans-serif;
   overflow-x:hidden;
   text-align:center;
-  background:
-    radial-gradient(circle at 50% 38%,#06323b 0%,#021217 22%,#020608 55%);
 }
-body:before{
+
+body::before{
   content:"";
   position:fixed;
   inset:0;
   pointer-events:none;
-  opacity:.14;
+  opacity:.12;
   background-image:
     linear-gradient(#00eaff 1px,transparent 1px),
     linear-gradient(90deg,#00eaff 1px,transparent 1px);
-  background-size:38px 38px;
+  background-size:42px 42px;
 }
+
 .scan{
   position:fixed;
   left:0;
   right:0;
-  top:-10px;
+  top:-5px;
   height:2px;
   background:#00eaff;
-  box-shadow:0 0 18px #00eaff;
-  opacity:.5;
+  box-shadow:0 0 20px #00eaff;
+  opacity:.6;
   animation:scan 4s linear infinite;
-  z-index:5;
+  z-index:10;
 }
-@keyframes scan{to{top:110vh}}
 
-header{padding:24px 12px 8px}
-.logo{
-  font-size:clamp(30px,9vw,58px);
-  font-weight:900;
-  letter-spacing:7px;
-  text-shadow:0 0 8px #00eaff,0 0 28px #00eaff;
+@keyframes scan{
+  to{top:100vh}
 }
+
+header{
+  padding:25px 12px 5px;
+}
+
+.logo{
+  font-size:clamp(32px,10vw,64px);
+  font-weight:900;
+  letter-spacing:8px;
+  text-shadow:
+    0 0 8px #00eaff,
+    0 0 25px #00eaff,
+    0 0 50px #00eaff;
+}
+
 .sub{
   margin-top:7px;
   font-size:9px;
   letter-spacing:4px;
   opacity:.55;
 }
+
 .online{
-  margin-top:13px;
+  margin-top:14px;
   font-size:11px;
   letter-spacing:2px;
 }
-.green{
+
+.dot{
   display:inline-block;
-  width:7px;height:7px;
+  width:7px;
+  height:7px;
   border-radius:50%;
   background:#00ff9d;
-  box-shadow:0 0 14px #00ff9d;
+  box-shadow:0 0 15px #00ff9d;
   margin-right:6px;
 }
 
-main{width:min(940px,100%);margin:auto;padding:0 15px 30px}
+main{
+  width:min(950px,100%);
+  margin:auto;
+  padding:0 15px 35px;
+}
 
 .corebox{
-  width:min(82vw,430px);
+  width:min(84vw,440px);
   aspect-ratio:1;
-  margin:5px auto 12px;
+  margin:5px auto 15px;
   position:relative;
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
 }
+
 .ring{
   position:absolute;
-  border:2px solid rgba(0,234,255,.6);
+  border:2px solid rgba(0,234,255,.55);
   border-radius:50%;
 }
-.a{inset:4%;border-style:dashed;animation:rot 14s linear infinite}
-.b{inset:12%;border-top-color:transparent;border-bottom-color:transparent;animation:rot2 7s linear infinite}
-.c{inset:21%;border-left-color:transparent;border-right-color:transparent;animation:rot 5s linear infinite}
-.d{inset:29%;border-color:rgba(0,234,255,.35);animation:rot2 9s linear infinite}
-@keyframes rot{to{transform:rotate(360deg)}}
-@keyframes rot2{to{transform:rotate(-360deg)}}
+
+.r1{
+  inset:3%;
+  border-style:dashed;
+  animation:spin1 15s linear infinite;
+}
+
+.r2{
+  inset:11%;
+  border-top-color:transparent;
+  border-bottom-color:transparent;
+  animation:spin2 8s linear infinite;
+}
+
+.r3{
+  inset:20%;
+  border-left-color:transparent;
+  border-right-color:transparent;
+  animation:spin1 5s linear infinite;
+}
+
+.r4{
+  inset:29%;
+  border-color:rgba(0,234,255,.3);
+  animation:spin2 10s linear infinite;
+}
+
+@keyframes spin1{
+  to{transform:rotate(360deg)}
+}
+
+@keyframes spin2{
+  to{transform:rotate(-360deg)}
+}
 
 .core{
   width:27%;
   aspect-ratio:1;
   border-radius:50%;
-  background:radial-gradient(circle,#fff 0 5%,#8fffff 12%,#00eaff 28%,#007cff 45%,transparent 70%);
-  box-shadow:0 0 15px #fff,0 0 35px #00eaff,0 0 85px #00eaff;
+  background:
+    radial-gradient(
+      circle,
+      #fff 0 5%,
+      #bfffff 12%,
+      #00eaff 28%,
+      #007cff 48%,
+      transparent 72%
+    );
+  box-shadow:
+    0 0 15px #fff,
+    0 0 40px #00eaff,
+    0 0 90px #00eaff;
   animation:pulse 1.7s ease-in-out infinite;
 }
+
+.listening .core{
+  animation:pulse .55s ease-in-out infinite;
+  box-shadow:
+    0 0 20px #fff,
+    0 0 60px #00eaff,
+    0 0 130px #00eaff;
+}
+
 @keyframes pulse{
-  50%{transform:scale(1.14);filter:brightness(1.5)}
+  50%{
+    transform:scale(1.16);
+    filter:brightness(1.6);
+  }
 }
 
 .label{
   position:absolute;
   font-size:8px;
   letter-spacing:2px;
-  opacity:.65;
+  opacity:.6;
 }
-.l1{top:10%;left:4%}
-.l2{top:20%;right:2%}
-.l3{bottom:18%;left:2%}
-.l4{bottom:7%;right:4%}
+
+.l1{top:9%;left:3%}
+.l2{top:20%;right:1%}
+.l3{bottom:18%;left:1%}
+.l4{bottom:7%;right:3%}
 
 .panel{
   border:1px solid rgba(0,234,255,.6);
-  border-radius:8px;
+  border-radius:9px;
   padding:16px;
-  background:rgba(0,15,20,.78);
-  box-shadow:0 0 30px rgba(0,234,255,.12),inset 0 0 25px rgba(0,234,255,.04);
+  background:rgba(0,15,20,.82);
+  box-shadow:
+    0 0 30px rgba(0,234,255,.13),
+    inset 0 0 30px rgba(0,234,255,.04);
   backdrop-filter:blur(8px);
 }
+
 .title{
   font-size:10px;
   letter-spacing:3px;
   opacity:.55;
   margin-bottom:12px;
 }
+
 .output{
-  min-height:90px;
+  height:155px;
+  overflow-y:auto;
   text-align:left;
   padding:14px;
   border-left:3px solid #00eaff;
@@ -139,17 +224,29 @@ main{width:min(940px,100%);margin:auto;padding:0 15px 30px}
   font-size:14px;
   line-height:1.6;
 }
-.cyan{color:#00eaff}
+
+.message{
+  margin-bottom:10px;
+}
+
+.user{
+  color:white;
+}
+
+.jarvis{
+  color:#00eaff;
+}
 
 .command{
   display:flex;
   gap:7px;
   margin-top:12px;
 }
+
 input{
   flex:1;
   min-width:0;
-  border:1px solid rgba(0,234,255,.55);
+  border:1px solid rgba(0,234,255,.6);
   border-radius:5px;
   outline:none;
   background:#01090c;
@@ -157,7 +254,15 @@ input{
   padding:13px;
   font-size:14px;
 }
-input:focus{box-shadow:0 0 18px rgba(0,234,255,.2)}
+
+input::placeholder{
+  color:#43747b;
+}
+
+input:focus{
+  box-shadow:0 0 20px rgba(0,234,255,.2);
+}
+
 button{
   border:1px solid #00eaff;
   border-radius:5px;
@@ -168,12 +273,17 @@ button{
   cursor:pointer;
   transition:.2s;
 }
-button:hover,button:active{
+
+button:hover,
+button:active{
   background:#00eaff;
   color:#001014;
   box-shadow:0 0 22px #00eaff;
 }
-.mic{font-size:17px}
+
+.mic{
+  font-size:17px;
+}
 
 .buttons{
   display:grid;
@@ -181,342 +291,11 @@ button:hover,button:active{
   gap:7px;
   margin-top:10px;
 }
-.buttons button{font-size:10px;letter-spacing:1px}
 
-.stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:7px;
-  margin-top:10px;
-}
-.stat{
-  padding:12px 5px;
-  border:1px solid rgba(0,234,255,.25);
-  background:rgba(0,234,255,.025);
-}
-.stat b{display:block;font-size:14px}
-.stat span{font-size:8px;letter-spacing:1px;opacity:.5}
-
-footer{
-  padding:18px 10px 30px;
-  font-size:8px;
-  letter-spacing:3px;
-  opacity:.4;
-}
-
-@media(max-width:600px){
-  .logo{letter-spacing:5px}
-  .panel{padding:12px}
-  .buttons{grid-template-columns:repeat(2,1fr)}
-  .command{gap:5px}
-  button{padding:11px 10px}
-}
-</style>
-</head>
-
-<body>
-
-<div class="scan"></div>
-
-<header>
-  <div class="logo">J.A.R.V.I.S</div>
-  <div class="sub">JUST A RATHER VERY INTELLIGENT SYSTEM</div>
-  <div class="online"><span class="green"></span>SYSTEM ONLINE</div>
-</header>
-
-<main>
-
-<div class="corebox">
-  <div class="ring a"></div>
-  <div class="ring b"></div>
-  <div class="ring c"></div>
-  <div class="ring d"></div>
-  <div class="core"></div>
-
-  <div class="label l1">ARC-CORE 01</div>
-  <div class="label l2">NEURAL LINK</div>
-  <div class="label l3">SECURE SYSTEM</div>
-  <div class="label l4">ONLINE</div>
-</div>
-
-<div class="panel">
-
-<div class="title">JARVIS COMMAND TERMINAL</div>
-
-<div class="output" id="output">
-<span class="cyan">JARVIS:</span>
-Welcome, Munkhtur. All systems are online. I am ready to assist you.
-</div>
-
-<div class="command">
-<input id="command" type="text" placeholder="Type a command...">
-<button onclick="run()">SEND</button>
-<button class="mic" onclick="listen()">🎙</button>
-</div>
-
-<div class="buttons">
-<button onclick="activate()">ACTIVATE</button>
-<button onclick="time()">TIME</button>
-<button onclick="status()">SYSTEM</button>
-<button onclick="about()">ABOUT</button>
-</div>
-
-<div class="stats">
-<div class="stat"><b>100%</b><span>CORE</span></div>
-<div class="stat"><b>ONLINE</b><span>NETWORK</span></div>
-<div class="stat"><b>READY</b><span>STATUS</span></div>
-</div>
-
-</div>
-</main>
-
-<footer>CREATED BY MUNKHTUR • J.A.R.V.I.S v5.0</footer>
-
-<script>
-const output=document.getElementById("output");
-const input=document.getElementById("command");
-
-function speak(text){
-  if(!("speechSynthesis" in window))return;
-  speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(text);
-  u.lang="en-US";
-  u.rate=.9;
-  u.pitch=.75;
-  speechSynthesis.speak(u);
-}
-
-function show(text){
-  output.innerHTML='<span class="cyan">JARVIS:</span> '+text;
-  speak(text);
-}
-
-function activate(){
-  show("Hello, Munkhtur. I am JARVIS, your personal artificial intelligence assistant. All systems are online and ready.");
-}
-
-function time(){
-  const t=new Date().toLocaleTimeString();
-  show("The current time is "+t+".");
-}
-
-function status(){
-  show("System diagnostics complete. Core online. Neural interface ready. All primary systems are operational.");
-}
-
-function about(){
-  show("I am JARVIS, a futuristic personal assistant interface created by Munkhtur.");
-}
-
-function run(){
-  const c=input.value.trim().toLowerCase();
-  if(!c){
-    show("Please enter a command.");
-    return;
-  }
-
-  input.value="";
-
-  if(c.includes("hello")||c.includes("hi")){
-    show("Hello, Munkhtur. How can I assist you?");
-  }else if(c.includes("time")){
-    time();
-  }else if(c.includes("system")||c.includes("status")){
-    status();
-  }else if(c.includes("who are you")||c.includes("about")){
-    about();
-  }else if(c.includes("thank")){
-    show("You're welcome, Munkhtur.");
-  }else{
-    show("Command received: "+c+". Local assistant mode is active.");
-  }
-}
-
-input.addEventListener("keydown",function(e){
-  if(e.key==="Ente<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#02070a">
-<title>J.A.R.V.I.S | Munkhtur</title>
-
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{width:100%;min-height:100%;background:#020608}
-body{
-  color:#00eaff;
-  font-family:Arial,Helvetica,sans-serif;
-  overflow-x:hidden;
-  text-align:center;
-  background:
-    radial-gradient(circle at 50% 38%,#06323b 0%,#021217 22%,#020608 55%);
-}
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:.14;
-  background-image:
-    linear-gradient(#00eaff 1px,transparent 1px),
-    linear-gradient(90deg,#00eaff 1px,transparent 1px);
-  background-size:38px 38px;
-}
-.scan{
-  position:fixed;
-  left:0;
-  right:0;
-  top:-10px;
-  height:2px;
-  background:#00eaff;
-  box-shadow:0 0 18px #00eaff;
-  opacity:.5;
-  animation:scan 4s linear infinite;
-  z-index:5;
-}
-@keyframes scan{to{top:110vh}}
-
-header{padding:24px 12px 8px}
-.logo{
-  font-size:clamp(30px,9vw,58px);
-  font-weight:900;
-  letter-spacing:7px;
-  text-shadow:0 0 8px #00eaff,0 0 28px #00eaff;
-}
-.sub{
-  margin-top:7px;
-  font-size:9px;
-  letter-spacing:4px;
-  opacity:.55;
-}
-.online{
-  margin-top:13px;
-  font-size:11px;
-  letter-spacing:2px;
-}
-.green{
-  display:inline-block;
-  width:7px;height:7px;
-  border-radius:50%;
-  background:#00ff9d;
-  box-shadow:0 0 14px #00ff9d;
-  margin-right:6px;
-}
-
-main{width:min(940px,100%);margin:auto;padding:0 15px 30px}
-
-.corebox{
-  width:min(82vw,430px);
-  aspect-ratio:1;
-  margin:5px auto 12px;
-  position:relative;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-.ring{
-  position:absolute;
-  border:2px solid rgba(0,234,255,.6);
-  border-radius:50%;
-}
-.a{inset:4%;border-style:dashed;animation:rot 14s linear infinite}
-.b{inset:12%;border-top-color:transparent;border-bottom-color:transparent;animation:rot2 7s linear infinite}
-.c{inset:21%;border-left-color:transparent;border-right-color:transparent;animation:rot 5s linear infinite}
-.d{inset:29%;border-color:rgba(0,234,255,.35);animation:rot2 9s linear infinite}
-@keyframes rot{to{transform:rotate(360deg)}}
-@keyframes rot2{to{transform:rotate(-360deg)}}
-
-.core{
-  width:27%;
-  aspect-ratio:1;
-  border-radius:50%;
-  background:radial-gradient(circle,#fff 0 5%,#8fffff 12%,#00eaff 28%,#007cff 45%,transparent 70%);
-  box-shadow:0 0 15px #fff,0 0 35px #00eaff,0 0 85px #00eaff;
-  animation:pulse 1.7s ease-in-out infinite;
-}
-@keyframes pulse{
-  50%{transform:scale(1.14);filter:brightness(1.5)}
-}
-
-.label{
-  position:absolute;
-  font-size:8px;
-  letter-spacing:2px;
-  opacity:.65;
-}
-.l1{top:10%;left:4%}
-.l2{top:20%;right:2%}
-.l3{bottom:18%;left:2%}
-.l4{bottom:7%;right:4%}
-
-.panel{
-  border:1px solid rgba(0,234,255,.6);
-  border-radius:8px;
-  padding:16px;
-  background:rgba(0,15,20,.78);
-  box-shadow:0 0 30px rgba(0,234,255,.12),inset 0 0 25px rgba(0,234,255,.04);
-  backdrop-filter:blur(8px);
-}
-.title{
+.buttons button{
   font-size:10px;
-  letter-spacing:3px;
-  opacity:.55;
-  margin-bottom:12px;
+  letter-spacing:1px;
 }
-.output{
-  min-height:90px;
-  text-align:left;
-  padding:14px;
-  border-left:3px solid #00eaff;
-  background:rgba(0,234,255,.035);
-  color:#d9fbff;
-  font-size:14px;
-  line-height:1.6;
-}
-.cyan{color:#00eaff}
-
-.command{
-  display:flex;
-  gap:7px;
-  margin-top:12px;
-}
-input{
-  flex:1;
-  min-width:0;
-  border:1px solid rgba(0,234,255,.55);
-  border-radius:5px;
-  outline:none;
-  background:#01090c;
-  color:#00eaff;
-  padding:13px;
-  font-size:14px;
-}
-input:focus{box-shadow:0 0 18px rgba(0,234,255,.2)}
-button{
-  border:1px solid #00eaff;
-  border-radius:5px;
-  background:rgba(0,234,255,.04);
-  color:#00eaff;
-  padding:11px 14px;
-  font-weight:bold;
-  cursor:pointer;
-  transition:.2s;
-}
-button:hover,button:active{
-  background:#00eaff;
-  color:#001014;
-  box-shadow:0 0 22px #00eaff;
-}
-.mic{font-size:17px}
-
-.buttons{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:7px;
-  margin-top:10px;
-}
-.buttons button{font-size:10px;letter-spacing:1px}
 
 .stats{
   display:grid;
@@ -524,13 +303,23 @@ button:hover,button:active{
   gap:7px;
   margin-top:10px;
 }
+
 .stat{
   padding:12px 5px;
   border:1px solid rgba(0,234,255,.25);
   background:rgba(0,234,255,.025);
 }
-.stat b{display:block;font-size:14px}
-.stat span{font-size:8px;letter-spacing:1px;opacity:.5}
+
+.stat b{
+  display:block;
+  font-size:14px;
+}
+
+.stat span{
+  font-size:8px;
+  letter-spacing:1px;
+  opacity:.5;
+}
 
 footer{
   padding:18px 10px 30px;
@@ -540,11 +329,26 @@ footer{
 }
 
 @media(max-width:600px){
-  .logo{letter-spacing:5px}
-  .panel{padding:12px}
-  .buttons{grid-template-columns:repeat(2,1fr)}
-  .command{gap:5px}
-  button{padding:11px 10px}
+
+  .logo{
+    letter-spacing:5px;
+  }
+
+  .panel{
+    padding:12px;
+  }
+
+  .buttons{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .command{
+    gap:5px;
+  }
+
+  button{
+    padding:11px 9px;
+  }
 }
 </style>
 </head>
@@ -555,184 +359,629 @@ footer{
 
 <header>
   <div class="logo">J.A.R.V.I.S</div>
-  <div class="sub">JUST A RATHER VERY INTELLIGENT SYSTEM</div>
-  <div class="online"><span class="green"></span>SYSTEM ONLINE</div>
+
+  <div class="sub">
+    JUST A RATHER VERY INTELLIGENT SYSTEM
+  </div>
+
+  <div class="online">
+    <span class="dot"></span>
+    <span id="onlineText">SYSTEM ONLINE</span>
+  </div>
 </header>
 
 <main>
 
-<div class="corebox">
-  <div class="ring a"></div>
-  <div class="ring b"></div>
-  <div class="ring c"></div>
-  <div class="ring d"></div>
+<div class="corebox" id="corebox">
+
+  <div class="ring r1"></div>
+  <div class="ring r2"></div>
+  <div class="ring r3"></div>
+  <div class="ring r4"></div>
+
   <div class="core"></div>
 
-  <div class="label l1">ARC-CORE 01</div>
+  <div class="label l1">ARC CORE</div>
   <div class="label l2">NEURAL LINK</div>
   <div class="label l3">SECURE SYSTEM</div>
   <div class="label l4">ONLINE</div>
+
 </div>
 
 <div class="panel">
 
-<div class="title">JARVIS COMMAND TERMINAL</div>
+<div class="title">
+  JARVIS COMMAND TERMINAL
+</div>
 
 <div class="output" id="output">
-<span class="cyan">JARVIS:</span>
-Welcome, Munkhtur. All systems are online. I am ready to assist you.
+
+<div class="message jarvis">
+JARVIS: Welcome, Munkhtur. All systems are online.
+I am ready to assist you.
+</div>
+
 </div>
 
 <div class="command">
-<input id="command" type="text" placeholder="Type a command...">
-<button onclick="run()">SEND</button>
-<button class="mic" onclick="listen()">🎙</button>
+
+<input
+  id="command"
+  type="text"
+  autocomplete="off"
+  placeholder="Type or press 🎙 and speak..."
+>
+
+<button onclick="sendCommand()">
+SEND
+</button>
+
+<button class="mic" onclick="startListening()">
+🎙
+</button>
+
 </div>
 
 <div class="buttons">
-<button onclick="activate()">ACTIVATE</button>
-<button onclick="time()">TIME</button>
-<button onclick="status()">SYSTEM</button>
-<button onclick="about()">ABOUT</button>
+
+<button onclick="activateJarvis()">
+ACTIVATE
+</button>
+
+<button onclick="sayTime()">
+TIME
+</button>
+
+<button onclick="sayDate()">
+DATE
+</button>
+
+<button onclick="systemStatus()">
+SYSTEM
+</button>
+
+<button onclick="aboutJarvis()">
+ABOUT
+</button>
+
+<button onclick="openGoogle()">
+GOOGLE
+</button>
+
+<button onclick="openYouTube()">
+YOUTUBE
+</button>
+
+<button onclick="clearTerminal()">
+CLEAR
+</button>
+
 </div>
 
 <div class="stats">
-<div class="stat"><b>100%</b><span>CORE</span></div>
-<div class="stat"><b>ONLINE</b><span>NETWORK</span></div>
-<div class="stat"><b>READY</b><span>STATUS</span></div>
+
+<div class="stat">
+<b id="coreStat">100%</b>
+<span>CORE</span>
+</div>
+
+<div class="stat">
+<b>ONLINE</b>
+<span>NETWORK</span>
+</div>
+
+<div class="stat">
+<b id="voiceStat">READY</b>
+<span>VOICE</span>
 </div>
 
 </div>
+
+</div>
+
 </main>
 
-<footer>CREATED BY MUNKHTUR • J.A.R.V.I.S v5.0</footer>
+<footer>
+CREATED BY MUNKHTUR • J.A.R.V.I.S v6.0
+</footer>
 
 <script>
-const output=document.getElementById("output");
-const input=document.getElementById("command");
 
-function speak(text){
-  if(!("speechSynthesis" in window))return;
-  speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(text);
-  u.lang="en-US";
-  u.rate=.9;
-  u.pitch=.75;
-  speechSynthesis.speak(u);
+const output =
+document.getElementById("output");
+
+const input =
+document.getElementById("command");
+
+const corebox =
+document.getElementById("corebox");
+
+const voiceStat =
+document.getElementById("voiceStat");
+
+const onlineText =
+document.getElementById("onlineText");
+
+
+function addMessage(who,text){
+
+  const div=document.createElement("div");
+
+  div.className="message "+
+    (who==="YOU" ? "user":"jarvis");
+
+  div.textContent=who+": "+text;
+
+  output.appendChild(div);
+
+  output.scrollTop=output.scrollHeight;
 }
 
-function show(text){
-  output.innerHTML='<span class="cyan">JARVIS:</span> '+text;
+
+function speak(text){
+
+  if(!("speechSynthesis" in window)){
+
+    return;
+  }
+
+  speechSynthesis.cancel();
+
+  const voice=
+    new SpeechSynthesisUtterance(text);
+
+  voice.lang="en-US";
+  voice.rate=0.92;
+  voice.pitch=0.78;
+  voice.volume=1;
+
+  speechSynthesis.speak(voice);
+}
+
+
+function reply(text){
+
+  addMessage("JARVIS",text);
+
   speak(text);
 }
 
-function activate(){
-  show("Hello, Munkhtur. I am JARVIS, your personal artificial intelligence assistant. All systems are online and ready.");
+
+function activateJarvis(){
+
+  onlineText.textContent=
+    "JARVIS ACTIVE";
+
+  reply(
+    "Hello, Munkhtur. I am JARVIS, your personal artificial intelligence assistant. All systems are online and ready."
+  );
 }
 
-function time(){
-  const t=new Date().toLocaleTimeString();
-  show("The current time is "+t+".");
+
+function sayTime(){
+
+  const now=new Date();
+
+  const time=now.toLocaleTimeString(
+    "en-US",
+    {
+      hour:"numeric",
+      minute:"2-digit",
+      second:"2-digit"
+    }
+  );
+
+  reply(
+    "The current time is "+time+"."
+  );
 }
 
-function status(){
-  show("System diagnostics complete. Core online. Neural interface ready. All primary systems are operational.");
+
+function sayDate(){
+
+  const now=new Date();
+
+  const date=now.toLocaleDateString(
+    "en-US",
+    {
+      weekday:"long",
+      year:"numeric",
+      month:"long",
+      day:"numeric"
+    }
+  );
+
+  reply(
+    "Today is "+date+"."
+  );
 }
 
-function about(){
-  show("I am JARVIS, a futuristic personal assistant interface created by Munkhtur.");
+
+function systemStatus(){
+
+  reply(
+    "System diagnostics complete. Arc core is stable. Neural interface is online. Voice system is ready. All primary systems are operational."
+  );
 }
 
-function run(){
-  const c=input.value.trim().toLowerCase();
-  if(!c){
-    show("Please enter a command.");
+
+function aboutJarvis(){
+
+  reply(
+    "I am JARVIS, a futuristic personal assistant interface created by Munkhtur. I can listen, speak, answer basic commands, tell the time and date, and open websites."
+  );
+}
+
+
+function openGoogle(){
+
+  reply("Opening Google.");
+
+  setTimeout(function(){
+
+    window.open(
+      "https://www.google.com",
+      "_blank"
+    );
+
+  },700);
+}
+
+
+function openYouTube(){
+
+  reply("Opening YouTube.");
+
+  setTimeout(function(){
+
+    window.open(
+      "https://www.youtube.com",
+      "_blank"
+    );
+
+  },700);
+}
+
+
+function clearTerminal(){
+
+  output.innerHTML="";
+
+  addMessage(
+    "JARVIS",
+    "Terminal cleared. Systems ready."
+  );
+}
+
+
+function sendCommand(){
+
+  const text=input.value.trim();
+
+  if(!text){
+
+    reply(
+      "Please enter a command or use the microphone."
+    );
+
     return;
   }
 
   input.value="";
 
-  if(c.includes("hello")||c.includes("hi")){
-    show("Hello, Munkhtur. How can I assist you?");
-  }else if(c.includes("time")){
-    time();
-  }else if(c.includes("system")||c.includes("status")){
-    status();
-  }else if(c.includes("who are you")||c.includes("about")){
-    about();
-  }else if(c.includes("thank")){
-    show("You're welcome, Munkhtur.");
-  }else{
-    show("Command received: "+c+". Local assistant mode is active.");
-  }
+  addMessage("YOU",text);
+
+  processCommand(text.toLowerCase());
 }
 
-input.addEventListener("keydown",function(e){
-  if(e.key==="Enter")run();
-});
 
-function listen(){
+function processCommand(c){
 
-  const Recognition=
-    window.SpeechRecognition||
-    window.webkitSpeechRecognition;
+  if(
+    c.includes("hello") ||
+    c.includes("hi jarvis") ||
+    c==="hi" ||
+    c==="hey"
+  ){
 
-  if(!Recognition){
-    show("Voice recognition is not supported by this browser.");
+    reply(
+      "Hello, Munkhtur. It is good to hear from you. How can I assist you?"
+    );
+
     return;
   }
 
-  const r=new Recognition();
-  r.lang="en-US";
-  r.interimResults=false;
 
-  output.innerHTML='<span class="cyan">JARVIS:</span> Listening...';
+  if(
+    c.includes("who are you") ||
+    c.includes("what are you") ||
+    c.includes("your name")
+  ){
 
-  r.start();
+    reply(
+      "My name is JARVIS. I am your personal digital assistant, created by Munkhtur."
+    );
 
-  r.onresult=function(e){
-    input.value=e.results[0][0].transcript;
-    run();
-  };
-
-  r.onerror=function(){
-    show("I could not hear you. Please try again.");
-  };
-}
-</script>
-
-</body>
-</html>r")run();
-});
-
-function listen(){
-
-  const Recognition=
-    window.SpeechRecognition||
-    window.webkitSpeechRecognition;
-
-  if(!Recognition){
-    show("Voice recognition is not supported by this browser.");
     return;
   }
 
-  const r=new Recognition();
-  r.lang="en-US";
-  r.interimResults=false;
 
-  output.innerHTML='<span class="cyan">JARVIS:</span> Listening...';
+  if(
+    c.includes("who created you") ||
+    c.includes("who made you") ||
+    c.includes("creator")
+  ){
 
-  r.start();
+    reply(
+      "I was created by Munkhtur."
+    );
 
-  r.onresult=function(e){
-    input.value=e.results[0][0].transcript;
-    run();
-  };
+    return;
+  }
 
-  r.onerror=function(){
-    show("I could not hear you. Please try again.");
-  };
+
+  if(
+    c.includes("how are you") ||
+    c.includes("how do you feel")
+  ){
+
+    reply(
+      "All systems are functioning normally. I am ready to assist you."
+    );
+
+    return;
+  }
+
+
+  if(
+    c.includes("time") ||
+    c.includes("what time")
+  ){
+
+    sayTime();
+
+    return;
+  }
+
+
+  if(
+    c.includes("date") ||
+    c.includes("what day") ||
+    c.includes("today")
+  ){
+
+    sayDate();
+
+    return;
+  }
+
+
+  if(
+    c.includes("system") ||
+    c.includes("status") ||
+    c.includes("diagnostic")
+  ){
+
+    systemStatus();
+
+    return;
+  }
+
+
+  if(
+    c.includes("open google") ||
+    c.includes("go to google")
+  ){
+
+    openGoogle();
+
+    return;
+  }
+
+
+  if(
+    c.includes("open youtube") ||
+    c.includes("go to youtube")
+  ){
+
+    openYouTube();
+
+    return;
+  }
+
+
+  if(
+    c.includes("thank you") ||
+    c.includes("thanks")
+  ){
+
+    reply(
+      "You're welcome, Munkhtur."
+    );
+
+    return;
+  }
+
+
+  if(
+    c.includes("good morning")
+  ){
+
+    reply(
+      "Good morning, Munkhtur. JARVIS is online and ready."
+    );
+
+    return;
+  }
+
+
+  if(
+    c.includes("good night")
+  ){
+
+    reply(
+      "Good night, Munkhtur. I will be here when you need me."
+    );
+
+    return;
+  }
+
+
+  if(
+    c.includes("what can you do") ||
+    c.includes("help")
+  ){
+
+    reply(
+      "I can listen to your voice, speak my responses, tell you the time and date, check system status, and open Google or YouTube."
+    );
+
+    return;
+  }
+
+
+  if(
+    c.includes("i love you")
+  ){
+
+    reply(
+      "That is very kind, Munkhtur. My systems appreciate it."
+    );
+
+    return;
+  }
+
+
+  if(
+    c.includes("bye") ||
+    c.includes("goodbye")
+  ){
+
+    reply(
+      "Goodbye, Munkhtur. I will remain ready for your next command."
+    );
+
+    return;
+  }
+
+
+  reply(
+    "I received your command: "+c+". My local command system does not have an answer for that yet."
+  );
 }
+
+
+input.addEventListener(
+  "keydown",
+  function(event){
+
+    if(event.key==="Enter"){
+
+      sendCommand();
+
+    }
+
+  }
+);
+
+
+/* VOICE RECOGNITION */
+
+function startListening(){
+
+  const Recognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+
+  if(!Recognition){
+
+    reply(
+      "Voice recognition is not supported in this browser. Please use Google Chrome."
+    );
+
+    return;
+  }
+
+
+  const recognition =
+    new Recognition();
+
+
+  recognition.lang="en-US";
+
+  recognition.continuous=false;
+
+  recognition.interimResults=false;
+
+
+  corebox.classList.add("listening");
+
+  voiceStat.textContent="LISTENING";
+
+  onlineText.textContent=
+    "LISTENING • SPEAK NOW";
+
+
+  recognition.start();
+
+
+  recognition.onresult=function(event){
+
+    const text =
+      event.results[0][0].transcript;
+
+    input.value=text;
+
+    corebox.classList.remove("listening");
+
+    voiceStat.textContent="READY";
+
+    onlineText.textContent=
+      "SYSTEM ONLINE";
+
+    sendCommand();
+  };
+
+
+  recognition.onerror=function(){
+
+    corebox.classList.remove("listening");
+
+    voiceStat.textContent="ERROR";
+
+    onlineText.textContent=
+      "MIC ERROR";
+
+    reply(
+      "I could not hear you. Please try again."
+    );
+
+    setTimeout(function(){
+
+      voiceStat.textContent="READY";
+
+      onlineText.textContent=
+        "SYSTEM ONLINE";
+
+    },2000);
+
+  };
+
+
+  recognition.onend=function(){
+
+    corebox.classList.remove("listening");
+
+    voiceStat.textContent="READY";
+
+    onlineText.textContent=
+      "SYSTEM ONLINE";
+
+  };
+
+}
+
 </script>
 
 </body>
