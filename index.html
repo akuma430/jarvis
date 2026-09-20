@@ -2,518 +2,549 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#020202">
-<title>J.A.R.V.I.S // MUNKHTUR</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>J.A.R.V.I.S OMEGA ULTRA</title>
 
 <style>
 :root{
-  --r:#ff2020;
-  --r2:#8b0000;
-  --bg:#020202;
-  --panel:rgba(8,4,4,.82);
-  --line:rgba(255,25,25,.25);
-  --txt:#eee;
-  --muted:#777;
+ --h:190;
+ --c:hsl(var(--h),100%,65%);
+ --c2:hsl(calc(var(--h)+45),100%,60%);
+ --bg:#010207;
+ --glass:rgba(4,9,18,.72);
+ --line:hsla(var(--h),100%,65%,.22);
 }
 
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html,body{
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  background:var(--bg);
-  color:var(--txt);
-  font-family:Arial,Helvetica,sans-serif;
-}
-
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
 body{
-  isolation:isolate;
+ background:#010207;
+ color:#eef8ff;
+ font-family:Arial,Helvetica,sans-serif;
 }
-
-/* ---------- BACKGROUND ---------- */
 
 #space{
-  position:fixed;
-  inset:0;
-  width:100%;
-  height:100%;
-  z-index:0;
-  pointer-events:none;
+ position:fixed;
+ inset:0;
+ width:100%;
+ height:100%;
+ z-index:-5;
+}
+
+.grid{
+ position:fixed;
+ inset:0;
+ z-index:-4;
+ opacity:.2;
+ background:
+ linear-gradient(hsla(var(--h),100%,70%,.08) 1px,transparent 1px),
+ linear-gradient(90deg,hsla(var(--h),100%,70%,.08) 1px,transparent 1px);
+ background-size:45px 45px;
+ transform:perspective(500px) rotateX(55deg) scale(1.5);
+ transform-origin:50% 100%;
 }
 
 .vignette{
-  position:fixed;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
-  background:
-    radial-gradient(
-      circle at center,
-      transparent 35%,
-      rgba(0,0,0,.5) 100%
-    );
+ position:fixed;
+ inset:0;
+ z-index:-3;
+ pointer-events:none;
+ background:radial-gradient(circle,transparent 30%,rgba(0,0,0,.72) 100%);
 }
 
 .scan{
-  position:fixed;
-  inset:0;
-  z-index:2;
-  pointer-events:none;
-  opacity:.1;
-  background:
-    repeating-linear-gradient(
-      0deg,
-      transparent 0,
-      transparent 3px,
-      rgba(255,0,0,.08) 4px
-    );
+ position:fixed;
+ inset:0;
+ z-index:99;
+ pointer-events:none;
+ background:repeating-linear-gradient(
+  0deg,
+  transparent 0px,
+  transparent 4px,
+  rgba(255,255,255,.012) 5px
+ );
 }
 
-/* ---------- APP ---------- */
-
-.app{
-  position:relative;
-  z-index:5;
-  width:100%;
-  height:100%;
-  display:flex;
-  flex-direction:column;
-}
-
-/* ---------- HEADER ---------- */
-
-.header{
-  height:62px;
-  flex:none;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 18px;
-  background:rgba(0,0,0,.7);
-  border-bottom:1px solid var(--line);
-  backdrop-filter:blur(10px);
+header{
+ position:fixed;
+ top:0;
+ left:0;
+ right:0;
+ height:70px;
+ z-index:20;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:0 22px;
+ background:rgba(1,4,9,.72);
+ border-bottom:1px solid var(--line);
+ backdrop-filter:blur(18px);
 }
 
 .logo{
-  color:#ff2424;
-  font-size:18px;
-  font-weight:900;
-  letter-spacing:4px;
-  text-shadow:0 0 14px red;
+ color:var(--c);
+ font-weight:900;
+ letter-spacing:.3em;
+ font-size:15px;
+ text-shadow:0 0 18px var(--c);
 }
 
-.sub{
-  color:#666;
-  font-size:8px;
-  letter-spacing:2px;
-  margin-top:3px;
+.logo small{
+ display:block;
+ color:#627080;
+ font-size:7px;
+ letter-spacing:.35em;
+ margin-top:5px;
 }
 
 .online{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  font-size:8px;
-  color:#888;
-  letter-spacing:2px;
+ color:#8391a0;
+ font-size:9px;
+ letter-spacing:.2em;
 }
 
-.dot{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#f00;
-  box-shadow:0 0 12px red;
+.online i{
+ display:inline-block;
+ width:7px;
+ height:7px;
+ border-radius:50%;
+ background:var(--c);
+ box-shadow:0 0 14px var(--c);
+ animation:blink 1s infinite;
 }
 
-/* ---------- MAIN ---------- */
-
-.main{
-  flex:1;
-  min-height:0;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+@keyframes blink{
+ 50%{opacity:.2}
 }
 
-/* ---------- HOLOGRAM ---------- */
-
-.holo{
-  height:275px;
-  width:100%;
-  flex:none;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-  perspective:700px;
+.app{
+ position:fixed;
+ top:70px;
+ bottom:0;
+ left:0;
+ right:0;
+ padding:12px;
+ display:grid;
+ grid-template-columns:240px minmax(350px,1fr) 250px;
+ gap:12px;
 }
 
-.holoCore{
-  width:108px;
-  height:108px;
-  border-radius:50%;
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  background:
-    radial-gradient(
-      circle,
-      #ffb0b0 0%,
-      #ff3030 9%,
-      #b00000 25%,
-      #300000 50%,
-      #050000 72%
-    );
-
-  border:2px solid #ff2222;
-
-  box-shadow:
-    0 0 18px #f00,
-    0 0 55px rgba(255,0,0,.7),
-    inset 0 0 28px #f00;
-
-  animation:core 2.5s ease-in-out infinite;
+.panel{
+ background:var(--glass);
+ border:1px solid var(--line);
+ border-radius:14px;
+ backdrop-filter:blur(15px);
+ overflow:hidden;
+ box-shadow:
+  inset 0 0 30px hsla(var(--h),100%,50%,.025),
+  0 0 35px hsla(var(--h),100%,50%,.04);
 }
 
-.holoCore:before,
-.holoCore:after{
-  content:"";
-  position:absolute;
-  border-radius:50%;
-  border:1px solid rgba(255,0,0,.65);
-  pointer-events:none;
+.panelTitle{
+ padding:12px;
+ color:var(--c);
+ font-size:9px;
+ letter-spacing:.25em;
+ border-bottom:1px solid var(--line);
 }
 
-.holoCore:before{
-  width:155px;
-  height:155px;
-  border-left-color:transparent;
-  border-right-color:transparent;
-  animation:spin 4s linear infinite;
+.panelBody{padding:10px}
+
+.cmd{
+ width:100%;
+ margin:4px 0;
+ padding:10px;
+ background:rgba(255,255,255,.025);
+ border:1px solid hsla(var(--h),100%,60%,.12);
+ border-radius:7px;
+ color:#9aa7b6;
+ font-size:9px;
+ text-align:left;
+ cursor:pointer;
+ transition:.2s;
 }
 
-.holoCore:after{
-  width:205px;
-  height:205px;
-  border-top-color:transparent;
-  border-bottom-color:transparent;
-  animation:spinReverse 7s linear infinite;
+.cmd:hover{
+ color:white;
+ border-color:var(--c);
+ box-shadow:0 0 18px hsla(var(--h),100%,60%,.16);
+ transform:translateX(3px);
 }
 
-.coreText{
-  font-size:10px;
-  letter-spacing:3px;
-  font-weight:bold;
-  text-shadow:0 0 10px white;
+.metric{
+ margin:15px 0;
 }
 
-.holoLabel{
-  position:absolute;
-  bottom:25px;
-  color:#777;
-  font-size:8px;
-  letter-spacing:3px;
+.metricHead{
+ display:flex;
+ justify-content:space-between;
+ font-size:8px;
+ color:#697788;
+ margin-bottom:5px;
 }
 
-@keyframes core{
-  0%,100%{
-    transform:scale(1);
-  }
-  50%{
-    transform:scale(1.06);
-  }
+.bar{
+ height:3px;
+ background:#0b1119;
+ border-radius:10px;
+ overflow:hidden;
+}
+
+.bar span{
+ display:block;
+ height:100%;
+ width:50%;
+ background:var(--c);
+ box-shadow:0 0 12px var(--c);
+ transition:.5s;
+}
+
+.center{
+ position:relative;
+ min-width:0;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+}
+
+.core{
+ width:min(58vh,470px);
+ aspect-ratio:1;
+ position:relative;
+ display:grid;
+ place-items:center;
+}
+
+.ring{
+ position:absolute;
+ inset:2%;
+ border:1px solid var(--c);
+ border-radius:50%;
+ box-shadow:0 0 20px hsla(var(--h),100%,60%,.12);
+ animation:spin 15s linear infinite;
+}
+
+.ring:nth-child(2){
+ inset:9%;
+ border-style:dashed;
+ animation-duration:9s;
+ animation-direction:reverse;
+}
+
+.ring:nth-child(3){
+ inset:18%;
+ border-color:var(--c2);
+ animation-duration:6s;
+}
+
+.ring:nth-child(4){
+ inset:29%;
+ border-style:dotted;
+ animation-duration:4s;
+ animation-direction:reverse;
+}
+
+.ring:nth-child(5){
+ inset:38%;
+ border-width:2px;
+ opacity:.5;
+ animation-duration:2.5s;
+}
+
+.ring:after{
+ content:"";
+ position:absolute;
+ width:7px;
+ height:7px;
+ border-radius:50%;
+ background:var(--c);
+ box-shadow:0 0 18px var(--c);
+ top:3%;
+ left:50%;
+}
+
+.coreOrb{
+ width:27%;
+ aspect-ratio:1;
+ border-radius:50%;
+ background:
+ radial-gradient(
+  circle,
+  white 0 2%,
+  var(--c) 7%,
+  hsla(var(--h),100%,35%,.9) 25%,
+  transparent 70%
+ );
+ box-shadow:
+ 0 0 25px var(--c),
+ 0 0 80px var(--c),
+ 0 0 150px hsla(var(--h),100%,50%,.35);
+ animation:pulse 2s infinite ease-in-out;
+}
+
+.cross{
+ position:absolute;
+ inset:0;
+}
+
+.cross:before,
+.cross:after{
+ content:"";
+ position:absolute;
+ background:linear-gradient(
+  90deg,
+  transparent,
+  var(--c),
+  transparent
+ );
+ opacity:.35;
+}
+
+.cross:before{
+ width:100%;
+ height:1px;
+ top:50%;
+}
+
+.cross:after{
+ height:100%;
+ width:1px;
+ left:50%;
 }
 
 @keyframes spin{
-  to{transform:rotate(360deg)}
+ to{transform:rotate(360deg)}
 }
 
-@keyframes spinReverse{
-  to{transform:rotate(-360deg)}
+@keyframes pulse{
+ 50%{
+  transform:scale(1.15);
+  filter:brightness(1.5);
+ }
 }
 
-.holoCore.listen{
-  animation:listen .42s infinite alternate;
+.state{
+ position:absolute;
+ top:7%;
+ font-size:9px;
+ letter-spacing:.25em;
+ color:#667585;
 }
 
-.holoCore.speak{
-  animation:speak .2s infinite alternate;
+.state b{
+ color:var(--c);
+ text-shadow:0 0 10px var(--c);
 }
 
-@keyframes listen{
-  from{
-    transform:scale(1);
-    box-shadow:
-      0 0 18px red,
-      0 0 50px rgba(255,0,0,.6),
-      inset 0 0 25px red;
-  }
-  to{
-    transform:scale(1.18);
-    box-shadow:
-      0 0 35px red,
-      0 0 100px rgba(255,0,0,.9),
-      inset 0 0 40px red;
-  }
+.coreText{
+ position:absolute;
+ bottom:8%;
+ font-size:8px;
+ color:#536272;
+ letter-spacing:.3em;
 }
 
-@keyframes speak{
-  from{transform:scale(.95)}
-  to{transform:scale(1.17)}
-}
-
-/* ---------- TERMINAL ---------- */
-
-.terminal{
-  width:min(920px,94%);
-  flex:1;
-  min-height:0;
-  display:flex;
-  flex-direction:column;
-
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:14px 14px 0 0;
-
-  box-shadow:
-    0 0 35px rgba(255,0,0,.08),
-    inset 0 0 25px rgba(255,0,0,.025);
-
-  backdrop-filter:blur(12px);
-  overflow:hidden;
-}
-
-.termTop{
-  height:40px;
-  flex:none;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 13px;
-  border-bottom:1px solid var(--line);
-}
-
-.termTitle{
-  color:#f22;
-  font-size:8px;
-  letter-spacing:3px;
-}
-
-.termState{
-  color:#666;
-  font-size:8px;
-  letter-spacing:2px;
+.chat{
+ position:absolute;
+ left:0;
+ right:0;
+ bottom:0;
+ height:190px;
+ display:flex;
+ flex-direction:column;
+ background:rgba(1,5,11,.91);
+ border:1px solid var(--line);
+ border-radius:13px;
+ overflow:hidden;
 }
 
 .messages{
-  flex:1;
-  min-height:0;
-  overflow-y:auto;
-  padding:15px;
+ flex:1;
+ overflow:auto;
+ padding:10px;
+ font-size:11px;
+ line-height:1.5;
 }
 
 .messages::-webkit-scrollbar{
-  width:3px;
+ width:3px;
 }
 
 .messages::-webkit-scrollbar-thumb{
-  background:#600;
+ background:var(--c);
 }
 
 .msg{
-  max-width:88%;
-  width:fit-content;
-  margin-bottom:12px;
-  padding:10px 12px;
-  border-radius:9px;
-  font-size:13px;
-  line-height:1.55;
-  white-space:pre-wrap;
-  word-break:break-word;
-}
-
-.msg.ai{
-  border-left:2px solid red;
-  background:rgba(255,0,0,.04);
-  margin-right:auto;
+ width:max-content;
+ max-width:88%;
+ margin:5px 0;
+ padding:7px 10px;
+ border-left:2px solid var(--c);
+ background:rgba(255,255,255,.025);
 }
 
 .msg.user{
-  border-right:2px solid red;
-  background:rgba(255,0,0,.11);
-  margin-left:auto;
-}
-
-.label{
-  display:block;
-  color:#f22;
-  font-size:8px;
-  letter-spacing:2px;
-  margin-bottom:5px;
-}
-
-/* ---------- THINKING ---------- */
-
-.thinking{
-  display:flex;
-  gap:5px;
-}
-
-.thinking span{
-  width:5px;
-  height:5px;
-  border-radius:50%;
-  background:red;
-  animation:think .7s infinite alternate;
-}
-
-.thinking span:nth-child(2){
-  animation-delay:.15s;
-}
-
-.thinking span:nth-child(3){
-  animation-delay:.3s;
-}
-
-@keyframes think{
-  from{
-    opacity:.2;
-    transform:translateY(0);
-  }
-  to{
-    opacity:1;
-    transform:translateY(-4px);
-  }
-}
-
-/* ---------- INPUT ---------- */
-
-.controls{
-  width:min(920px,94%);
-  flex:none;
-  display:flex;
-  gap:7px;
-  padding:10px 0 13px;
+ margin-left:auto;
+ border-left-color:#7a8796;
 }
 
 .input{
-  flex:1;
-  min-width:0;
-  height:46px;
-  padding:0 13px;
-  border-radius:9px;
-  border:1px solid #430000;
-  outline:none;
-  background:#070707;
-  color:white;
-  font-size:13px;
+ display:flex;
+ border-top:1px solid var(--line);
 }
 
-.input:focus{
-  border-color:red;
-  box-shadow:0 0 14px rgba(255,0,0,.18);
+input{
+ flex:1;
+ min-width:0;
+ padding:12px;
+ background:transparent;
+ border:0;
+ outline:0;
+ color:white;
+ font-size:11px;
 }
 
-button{
-  height:46px;
-  border-radius:9px;
-  border:1px solid #650000;
-  background:#130000;
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
+.action{
+ width:48px;
+ border:0;
+ background:hsla(var(--h),100%,50%,.12);
+ color:var(--c);
+ cursor:pointer;
+ font-size:17px;
 }
 
-button:active{
-  transform:scale(.96);
+.action:hover{
+ background:var(--c);
+ color:#000;
 }
 
-#mic{
-  width:50px;
-  font-size:17px;
+.action.active{
+ background:var(--c);
+ color:#000;
+ box-shadow:0 0 25px var(--c);
 }
 
-#mic.active{
-  background:#800000;
-  border-color:red;
-  box-shadow:0 0 25px red;
+.info{
+ color:#657487;
+ font-size:9px;
+ line-height:2.1;
 }
 
-#send{
-  padding:0 16px;
+.info b{
+ float:right;
+ color:#e4edf6;
+ font-weight:normal;
 }
 
-/* ---------- MOBILE ---------- */
+.chip{
+ display:inline-block;
+ margin:3px;
+ padding:5px 7px;
+ border:1px solid var(--line);
+ border-radius:50px;
+ color:#788696;
+ font-size:8px;
+}
 
-@media(max-width:600px){
+.creator{
+ position:absolute;
+ bottom:6px;
+ left:0;
+ right:0;
+ text-align:center;
+ color:#334252;
+ font-size:7px;
+ letter-spacing:.4em;
+}
 
-  .header{
-    height:56px;
-    padding:0 13px;
-  }
+.boot{
+ position:fixed;
+ inset:0;
+ z-index:500;
+ background:#010205;
+ display:grid;
+ place-items:center;
+ transition:opacity .8s;
+}
 
-  .logo{
-    font-size:14px;
-    letter-spacing:2px;
-  }
+.bootBox{
+ width:min(520px,85vw);
+}
 
-  .sub{
-    font-size:6px;
-  }
+.bootName{
+ text-align:center;
+ color:var(--c);
+ font-size:24px;
+ font-weight:900;
+ letter-spacing:.3em;
+ text-shadow:0 0 25px var(--c);
+}
 
-  .holo{
-    height:220px;
-  }
+.bootBar{
+ height:3px;
+ background:#0b121c;
+ margin-top:25px;
+ overflow:hidden;
+}
 
-  .holoCore{
-    width:88px;
-    height:88px;
-  }
+.bootBar span{
+ display:block;
+ width:0;
+ height:100%;
+ background:var(--c);
+ box-shadow:0 0 20px var(--c);
+ animation:loading 2.3s forwards;
+}
 
-  .holoCore:before{
-    width:130px;
-    height:130px;
-  }
+.bootText{
+ text-align:center;
+ color:#647386;
+ font-size:8px;
+ letter-spacing:.25em;
+ margin-top:12px;
+}
 
-  .holoCore:after{
-    width:165px;
-    height:165px;
-  }
+@keyframes loading{
+ to{width:100%}
+}
 
-  .msg{
-    font-size:12px;
-    max-width:93%;
-  }
+@media(max-width:900px){
 
-  .controls{
-    width:94%;
-  }
+ .app{
+  grid-template-columns:1fr;
+ }
 
-  #send{
-    padding:0 12px;
-  }
+ .left,.right{
+  display:none;
+ }
+
+ .core{
+  width:min(72vw,390px);
+ }
+
+ .center{
+  padding-bottom:195px;
+ }
+
+ header{
+  padding:0 12px;
+ }
+
+ .logo{
+  font-size:11px;
+ }
 
 }
 
-/* ---------- REDUCED MOTION ---------- */
+@media(max-height:650px){
 
-@media(prefers-reduced-motion:reduce){
+ .core{
+  width:min(48vh,330px);
+ }
 
-  *,
-  *:before,
-  *:after{
-    animation-duration:.001ms!important;
-    animation-iteration-count:1!important;
-  }
+ .chat{
+  height:150px;
+ }
 
 }
 </style>
@@ -522,1290 +553,1533 @@ button:active{
 <body>
 
 <canvas id="space"></canvas>
-
+<div class="grid"></div>
 <div class="vignette"></div>
 <div class="scan"></div>
 
-<div class="app">
-
-<header class="header">
-
-  <div>
-    <div class="logo">J.A.R.V.I.S</div>
-    <div class="sub">
-      MUNKHTUR // ADVANCED SYSTEM
-    </div>
+<div class="boot" id="boot">
+ <div class="bootBox">
+  <div class="bootName">J.A.R.V.I.S OMEGA</div>
+  <div class="bootBar"><span></span></div>
+  <div class="bootText" id="bootText">
+   INITIALIZING NEURAL CORE...
   </div>
+ </div>
+</div>
 
-  <div class="online">
-    <span class="dot"></span>
-    ONLINE
-  </div>
+<header>
+
+ <div class="logo">
+  J.A.R.V.I.S OMEGA
+  <small>ULTRA CINEMATIC PERSONAL AI // CREATED BY MUNKHTUR</small>
+ </div>
+
+ <div class="online">
+  <i></i>
+  <span id="status">ONLINE</span>
+ </div>
 
 </header>
 
-<main class="main">
+<div class="app">
 
-<section class="holo">
+<!-- LEFT -->
 
-  <div
-    id="core"
-    class="holoCore"
-  >
-    <div class="coreText">
-      JARVIS
-    </div>
+<section class="panel left">
+
+ <div class="panelTitle">
+  COMMAND MATRIX
+ </div>
+
+ <div class="panelBody">
+
+  <button class="cmd" data-q="Who created you?">
+   ◈ IDENTITY / CREATOR
+  </button>
+
+  <button class="cmd" data-q="System status">
+   ◈ SYSTEM DIAGNOSTICS
+  </button>
+
+  <button class="cmd" data-q="What time is it?">
+   ◈ TIME / DATE
+  </button>
+
+  <button class="cmd" data-q="Tell me a joke">
+   ◈ JOKE PROTOCOL
+  </button>
+
+  <button class="cmd" data-q="Open YouTube">
+   ◈ OPEN YOUTUBE
+  </button>
+
+  <button class="cmd" data-q="Open Google">
+   ◈ OPEN GOOGLE
+  </button>
+
+  <button class="cmd" data-q="Open Instagram">
+   ◈ OPEN INSTAGRAM
+  </button>
+
+  <button class="cmd" data-q="Open TikTok">
+   ◈ OPEN TIKTOK
+  </button>
+
+  <button class="cmd" data-q="Open Roblox">
+   ◈ OPEN ROBLOX
+  </button>
+
+  <button class="cmd" data-q="Open Spotify">
+   ◈ OPEN SPOTIFY
+  </button>
+
+  <button class="cmd" data-q="Help">
+   ◈ HELP
+  </button>
+
+ </div>
+
+ <div class="panelTitle">
+  CORE TELEMETRY
+ </div>
+
+ <div class="panelBody">
+
+  <div class="metric">
+   <div class="metricHead">
+    <span>CORE POWER</span>
+    <span id="powerText">94%</span>
+   </div>
+   <div class="bar">
+    <span id="power"></span>
+   </div>
   </div>
 
-  <div
-    id="mode"
-    class="holoLabel"
-  >
-    SYSTEM READY
+  <div class="metric">
+   <div class="metricHead">
+    <span>NEURAL LOAD</span>
+    <span id="loadText">20%</span>
+   </div>
+   <div class="bar">
+    <span id="load"></span>
+   </div>
   </div>
+
+  <div class="metric">
+   <div class="metricHead">
+    <span>LINK STABILITY</span>
+    <span>99%</span>
+   </div>
+   <div class="bar">
+    <span style="width:99%"></span>
+   </div>
+  </div>
+
+ </div>
 
 </section>
 
-<section class="terminal">
 
-  <div class="termTop">
+<!-- CENTER -->
 
-    <div class="termTitle">
-      NEURAL INTERFACE
-    </div>
+<section class="center">
 
-    <div
-      id="state"
-      class="termState"
-    >
-      STANDBY
-    </div>
+ <div class="state">
+  OMEGA STATE //
+  <b id="state">STANDBY</b>
+ </div>
 
+ <div class="core">
+
+  <div class="ring"></div>
+  <div class="ring"></div>
+  <div class="ring"></div>
+  <div class="ring"></div>
+  <div class="ring"></div>
+
+  <div class="cross"></div>
+
+  <div class="coreOrb"></div>
+
+  <div class="coreText">
+   NEURAL CORE // OMEGA-∞ // ACTIVE
   </div>
 
-  <div
-    id="messages"
-    class="messages"
-  ></div>
+ </div>
 
-</section>
 
-<div class="controls">
+ <div class="chat">
 
-  <input
+  <div class="messages" id="messages"></div>
+
+  <div class="input">
+
+   <input
     id="input"
-    class="input"
     autocomplete="off"
     placeholder="Ask JARVIS anything..."
-  >
+   >
 
-  <button
-    id="mic"
-    title="English microphone"
-  >
+   <button class="action" id="mic">
     🎙
-  </button>
+   </button>
 
-  <button id="send">
-    SEND
-  </button>
+   <button class="action" id="send">
+    ➤
+   </button>
+
+  </div>
+
+ </div>
+
+ <div class="creator">
+  CREATED BY MUNKHTUR // J.A.R.V.I.S OMEGA ULTRA
+ </div>
+
+</section>
+
+
+<!-- RIGHT -->
+
+<section class="panel right">
+
+ <div class="panelTitle">
+  OMEGA TELEMETRY
+ </div>
+
+ <div class="panelBody">
+
+  <div class="info">
+
+   MODE
+   <b>CINEMATIC</b>
+   <br>
+
+   VOICE
+   <b id="voice">READY</b>
+   <br>
+
+   MEMORY
+   <b id="memory">0</b>
+   <br>
+
+   Q&A ENGINE
+   <b>20K+</b>
+   <br>
+
+   COLOR ENGINE
+   <b>AUTO</b>
+   <br>
+
+   UPTIME
+   <b id="uptime">00:00</b>
+
+  </div>
+
+ </div>
+
+ <div class="panelTitle">
+  KNOWLEDGE DOMAINS
+ </div>
+
+ <div class="panelBody">
+
+  <span class="chip">SCIENCE</span>
+  <span class="chip">HISTORY</span>
+  <span class="chip">MATH</span>
+  <span class="chip">TECH</span>
+  <span class="chip">SPACE</span>
+  <span class="chip">SPORTS</span>
+  <span class="chip">GAMING</span>
+  <span class="chip">ENGLISH</span>
+  <span class="chip">SCHOOL</span>
+  <span class="chip">GENERAL</span>
+
+ </div>
+
+</section>
 
 </div>
 
-</main>
-
-</div>
 
 <script>
-/* =========================================================
-   JARVIS V10
-   ========================================================= */
 
-/*
-  AI BACKEND-ээ дараа нь энд оруулна.
+/* =====================================
+   J.A.R.V.I.S OMEGA ULTRA ENGINE
+   CREATED BY MUNKHTUR
+===================================== */
 
-  Жишээ:
-  const AI_BACKEND =
-  "https://your-worker.workers.dev";
-*/
+const $=id=>document.getElementById(id);
 
-const AI_BACKEND = "https://munkhtur-jarvis.akumakira62.workers.dev";
+const root=document.documentElement;
 
-
-/* =========================================================
-   ELEMENTS
-   ========================================================= */
-
-const canvas =
-  document.getElementById("space");
-
-const ctx =
-  canvas.getContext("2d",{
-    alpha:true
-  });
-
-const core =
-  document.getElementById("core");
-
-const mode =
-  document.getElementById("mode");
-
-const state =
-  document.getElementById("state");
-
-const input =
-  document.getElementById("input");
-
-const send =
-  document.getElementById("send");
-
-const mic =
-  document.getElementById("mic");
-
-const messages =
-  document.getElementById("messages");
+let hue=190;
+let messagesCount=0;
+let started=Date.now();
+let recognition=null;
+let listening=false;
 
 
-/* =========================================================
-   LIGHTWEIGHT 4D-STYLE PARTICLE ENGINE
-   ========================================================= */
+/* =====================================
+   MESSAGE ENGINE
+===================================== */
 
-let W=0;
-let H=0;
-let dpr=1;
+function addMessage(type,text){
 
-let particles=[];
+ const el=document.createElement("div");
 
-const COUNT =
-  innerWidth < 600 ? 45 : 70;
+ el.className="msg "+type;
 
-let animationRunning=true;
+ el.textContent=text;
+
+ $("messages").appendChild(el);
+
+ $("messages").scrollTop=
+  $("messages").scrollHeight;
+
+ messagesCount++;
+
+ $("memory").textContent=
+  messagesCount;
+
+}
+
+
+/* =====================================
+   VOICE ENGINE
+===================================== */
+
+function speak(text){
+
+ if(!("speechSynthesis" in window))
+  return;
+
+ speechSynthesis.cancel();
+
+ $("state").textContent="SPEAKING";
+ $("voice").textContent="SPEAKING";
+
+ const voice=
+  new SpeechSynthesisUtterance(text);
+
+ voice.lang="en-US";
+ voice.rate=.94;
+ voice.pitch=.8;
+ voice.volume=1;
+
+ voice.onend=()=>{
+
+  $("state").textContent="STANDBY";
+  $("voice").textContent="READY";
+
+ };
+
+ speechSynthesis.speak(voice);
+
+}
+
+
+/* =====================================
+   RESPONSE
+===================================== */
+
+function response(text){
+
+ addMessage("ai",text);
+
+ speak(text);
+
+}
+
+
+/* =====================================
+   NORMALIZER
+===================================== */
+
+function normalize(text){
+
+ return text
+  .toLowerCase()
+  .replace(/[^\w\s?'.:+\-*/]/g,"")
+  .trim();
+
+}
+
+
+/* =====================================
+   SITE ENGINE
+===================================== */
+
+const websites={
+
+ youtube:[
+  "https://www.youtube.com",
+  "YouTube"
+ ],
+
+ google:[
+  "https://www.google.com",
+  "Google"
+ ],
+
+ instagram:[
+  "https://www.instagram.com",
+  "Instagram"
+ ],
+
+ facebook:[
+  "https://www.facebook.com",
+  "Facebook"
+ ],
+
+ messenger:[
+  "https://www.messenger.com",
+  "Messenger"
+ ],
+
+ tiktok:[
+  "https://www.tiktok.com",
+  "TikTok"
+ ],
+
+ spotify:[
+  "https://open.spotify.com",
+  "Spotify"
+ ],
+
+ roblox:[
+  "https://www.roblox.com",
+  "Roblox"
+ ],
+
+ minecraft:[
+  "https://www.minecraft.net",
+  "Minecraft"
+ ],
+
+ standoff:[
+  "https://standoff2.com",
+  "Standoff 2"
+ ]
+
+};
+
+
+function openWebsite(name){
+
+ const data=websites[name];
+
+ if(!data)return false;
+
+ response(
+  "Opening "+data[1]+"."
+ );
+
+ setTimeout(()=>{
+
+  window.open(
+   data[0],
+   "_blank"
+  );
+
+ },400);
+
+ return true;
+
+}
+
+
+/* =====================================
+   CALCULATOR
+===================================== */
+
+function calculator(expression){
+
+ try{
+
+  const clean=
+   expression
+    .replace(/[^0-9+\-*/().% ]/g,"");
+
+  if(!clean)return null;
+
+  return Function(
+   '"use strict";return ('+
+   clean.replace(/%/g,"/100")+
+   ")"
+  )();
+
+ }catch(e){
+
+  return null;
+
+ }
+
+}
+
+
+/* =====================================
+   KNOWLEDGE DATABASE
+===================================== */
+
+const knowledge=[
+
+ ["who created you",
+  "I was created by Munkhtur."],
+
+ ["who made you",
+  "Munkhtur created me."],
+
+ ["who built you",
+  "My creator is Munkhtur."],
+
+ ["your creator",
+  "My creator is Munkhtur."],
+
+ ["what is your name",
+  "I am J.A.R.V.I.S OMEGA."],
+
+ ["who are you",
+  "I am J.A.R.V.I.S OMEGA, a cinematic personal AI interface created by Munkhtur."],
+
+ ["what are you",
+  "I am J.A.R.V.I.S OMEGA, a futuristic personal AI interface created by Munkhtur."],
+
+ ["hello",
+  "Hello. J.A.R.V.I.S OMEGA is online."],
+
+ ["hi",
+  "Hello. All systems are ready."],
+
+ ["hey",
+  "Hey. OMEGA systems are online."],
+
+ ["how are you",
+  "All core systems are operating normally."],
+
+ ["good morning",
+  "Good morning. J.A.R.V.I.S OMEGA is ready."],
+
+ ["good evening",
+  "Good evening. Systems are ready."],
+
+ ["thank you",
+  "You're welcome."],
+
+ ["thanks",
+  "Anytime."],
+
+ ["what can you do",
+  "I can handle commands, voice interaction, calculations, website launching, jokes, time, diagnostics and my offline knowledge engine."],
+
+ ["what is ai",
+  "AI means artificial intelligence. It describes computer systems designed to perform tasks that normally require human intelligence."],
+
+ ["what is artificial intelligence",
+  "Artificial intelligence is the field of creating systems that can perform tasks involving learning, reasoning, perception or language."],
+
+ ["what is a computer",
+  "A computer is an electronic machine that processes information using instructions called programs."],
+
+ ["what is cpu",
+  "CPU means Central Processing Unit. It executes instructions and performs calculations."],
+
+ ["what is gpu",
+  "GPU means Graphics Processing Unit. It is designed for highly parallel computation and graphics processing."],
+
+ ["what is ram",
+  "RAM is fast temporary memory used by the operating system and running applications."],
+
+ ["what is rom",
+  "ROM is non-volatile memory used to store data that should remain available without power."],
+
+ ["what is storage",
+  "Storage keeps data persistently, such as files, apps, photos and games."],
+
+ ["what is ssd",
+  "An SSD is solid-state storage that uses flash memory and has no spinning disk."],
+
+ ["what is hdd",
+  "An HDD stores data using magnetic disks and mechanical read/write heads."],
+
+ ["what is internet",
+  "The internet is a global network of interconnected computer networks."],
+
+ ["what is wifi",
+  "Wi-Fi is a wireless networking technology used to connect devices to local networks."],
+
+ ["what is bluetooth",
+  "Bluetooth is a short-range wireless technology used to connect nearby devices."],
+
+ ["what is html",
+  "HTML is the markup language used to structure content on websites."],
+
+ ["what is css",
+  "CSS controls the appearance, layout and visual styling of websites."],
+
+ ["what is javascript",
+  "JavaScript is a programming language commonly used to make websites interactive."],
+
+ ["what is programming",
+  "Programming means writing instructions that computers can execute."],
+
+ ["what is code",
+  "Code is a set of instructions written in a programming language."],
+
+ ["what is algorithm",
+  "An algorithm is a defined sequence of steps for solving a problem or completing a task."],
+
+ ["what is gravity",
+  "Gravity is the interaction through which masses attract one another."],
+
+ ["what is force",
+  "Force is an interaction that can change an object's motion. It is measured in newtons."],
+
+ ["what is speed",
+  "Speed describes distance traveled per unit of time."],
+
+ ["what is velocity",
+  "Velocity describes speed together with direction."],
+
+ ["what is energy",
+  "Energy is the capacity of a system to cause change or perform work."],
+
+ ["what is electricity",
+  "Electricity involves electric charge and its movement or effects."],
+
+ ["what is atom",
+  "An atom is a basic unit of an element consisting of a nucleus and electrons."],
+
+ ["what is molecule",
+  "A molecule consists of two or more atoms chemically bonded together."],
+
+ ["what is water",
+  "Water is H2O, made from two hydrogen atoms and one oxygen atom."],
+
+ ["what is oxygen",
+  "Oxygen is a chemical element essential to many biological processes and combustion."],
+
+ ["what is carbon",
+  "Carbon is a chemical element that forms the basis of many molecules in living organisms."],
+
+ ["what is photosynthesis",
+  "Photosynthesis is the process plants use to convert light energy into chemical energy."],
+
+ ["what is dna",
+  "DNA stores hereditary genetic information in living organisms."],
+
+ ["what is cell",
+  "A cell is the basic structural and functional unit of living organisms."],
+
+ ["what is brain",
+  "The brain is the central organ of the nervous system and processes information."],
+
+ ["why do we sleep",
+  "Sleep supports memory, learning, regulation and physical recovery."],
+
+ ["why is sky blue",
+  "The sky appears blue because Earth's atmosphere scatters shorter blue wavelengths of sunlight more strongly."],
+
+ ["what is sun",
+  "The Sun is the star at the center of our solar system."],
+
+ ["what is moon",
+  "The Moon is Earth's natural satellite."],
+
+ ["what is earth",
+  "Earth is the third planet from the Sun and the only world currently known to support life."],
+
+ ["how many planets",
+  "There are eight recognized planets in our Solar System."],
+
+ ["what is mars",
+  "Mars is the fourth planet from the Sun and is often called the Red Planet."],
+
+ ["what is jupiter",
+  "Jupiter is the largest planet in the Solar System."],
+
+ ["what is saturn",
+  "Saturn is a gas giant famous for its prominent ring system."],
+
+ ["what is black hole",
+  "A black hole is a region of spacetime where gravity is extremely strong and light cannot escape from within its event horizon."],
+
+ ["what is galaxy",
+  "A galaxy is a gravitationally bound system containing stars, gas, dust and dark matter."],
+
+ ["what is milky way",
+  "The Milky Way is the galaxy containing our Solar System."],
+
+ ["what is universe",
+  "The universe includes all known space, time, matter and energy."],
+
+ ["what is basketball",
+  "Basketball is a team sport where players score by putting a ball through a hoop."],
+
+ ["what is football",
+  "Football, also called soccer, is a team sport where players try to score in the opponent's goal."],
+
+ ["what is boxing",
+  "Boxing is a combat sport involving regulated punching between two opponents."],
+
+ ["what is running",
+  "Running is a form of locomotion where the body moves rapidly using alternating leg movements."],
+
+ ["what is minecraft",
+  "Minecraft is a sandbox game focused on building, exploration, crafting and survival."],
+
+ ["what is roblox",
+  "Roblox is an online platform where users can play and create interactive experiences."],
+
+ ["what is gaming",
+  "Gaming means playing interactive electronic games on devices such as phones, computers and consoles."],
+
+ ["what is history",
+  "History is the study of past events using evidence such as documents, artifacts and records."],
+
+ ["what is math",
+  "Mathematics is the study of quantity, structure, patterns, space and logical relationships."],
+
+ ["what is english",
+  "English is a widely spoken Germanic language used internationally."],
+
+ ["what is mongolia",
+  "Mongolia is a landlocked country in East and Central Asia, between Russia and China."],
+
+ ["capital of mongolia",
+  "The capital of Mongolia is Ulaanbaatar."],
+
+ ["what is school",
+  "A school is an educational institution where students learn subjects and develop skills."],
+
+ ["what is science",
+  "Science is a systematic way of studying the natural world through observation, testing and evidence."],
+
+ ["what is chemistry",
+  "Chemistry is the study of matter, its properties, structure and reactions."],
+
+ ["what is physics",
+  "Physics studies matter, energy, motion, forces and the fundamental behavior of nature."],
+
+ ["what is biology",
+  "Biology is the scientific study of living organisms."],
+
+ ["what is geography",
+  "Geography studies Earth's places, environments, people and spatial relationships."],
+
+ ["what is space",
+  "Outer space is the vast region beyond Earth's atmosphere."],
+
+ ["what is technology",
+  "Technology is the application of knowledge and tools to solve problems and perform tasks."],
+
+ ["what is smartphone",
+  "A smartphone is a mobile computer combining communication, applications, cameras and internet access."],
+
+ ["what is android",
+  "Android is a mobile operating system developed by Google and the Android Open Source Project."],
+
+ ["what is github",
+  "GitHub is a platform for hosting, collaborating on and managing software projects using Git."],
+
+ ["what is website",
+  "A website is a collection of related web pages and resources available through the internet."],
+
+ ["what is cloud",
+  "Cloud computing provides computing resources such as storage and servers through networks."],
+
+ ["what is password",
+  "A password is a secret string used to authenticate access to an account or system."],
+
+ ["what is cybersecurity",
+  "Cybersecurity involves protecting systems, networks and data from unauthorized access and attacks."]
+
+];
+
+
+/* =====================================
+   QUESTION VARIANTS
+===================================== */
+
+const aliases={
+
+ creator:[
+  "who made you",
+  "who built you",
+  "who created you",
+  "who is your creator",
+  "who is your owner"
+ ],
+
+ ai:[
+  "what is ai",
+  "what is artificial intelligence",
+  "define ai",
+  "explain ai",
+  "tell me about artificial intelligence"
+ ],
+
+ cpu:[
+  "what is cpu",
+  "what does cpu mean",
+  "explain cpu",
+  "define cpu"
+ ],
+
+ gpu:[
+  "what is gpu",
+  "what does gpu mean",
+  "explain gpu",
+  "define gpu"
+ ],
+
+ gravity:[
+  "what is gravity",
+  "explain gravity",
+  "how does gravity work",
+  "define gravity"
+ ],
+
+ minecraft:[
+  "what is minecraft",
+  "tell me about minecraft",
+  "explain minecraft"
+ ],
+
+ roblox:[
+  "what is roblox",
+  "tell me about roblox",
+  "explain roblox"
+ ]
+
+};
+
+
+/* =====================================
+   FIND KNOWLEDGE
+===================================== */
+
+function findKnowledge(query){
+
+ const q=normalize(query);
+
+ for(const item of knowledge){
+
+  const key=item[0];
+
+  if(
+   q===key ||
+   q.includes(key)
+  ){
+
+   return item[1];
+
+  }
+
+ }
+
+
+ let best=null;
+ let bestScore=0;
+
+ for(const item of knowledge){
+
+  const words=
+   item[0]
+    .split(" ")
+    .filter(Boolean);
+
+  let hits=0;
+
+  for(const word of words){
+
+   if(q.includes(word))
+    hits++;
+
+  }
+
+  const score=
+   hits/words.length;
+
+  if(
+   hits>=2 &&
+   score>bestScore
+  ){
+
+   bestScore=score;
+   best=item[1];
+
+  }
+
+ }
+
+ return best;
+
+}
+
+
+/* =====================================
+   LOCAL AI
+===================================== */
+
+function localAI(raw){
+
+ const q=normalize(raw);
+
+
+ /* CREATOR */
+
+ if(
+  q.includes("who created") ||
+  q.includes("who made") ||
+  q.includes("who built") ||
+  q.includes("your creator")
+ ){
+
+  return "I was created and built by Munkhtur.";
+
+ }
+
+
+ /* HELP */
+
+ if(
+  q==="help" ||
+  q.includes("what can i ask") ||
+  q.includes("what can you do") ||
+  q.includes("commands")
+ ){
+
+  return "You can ask about science, history, math, technology, space, sports, gaming, English and general topics. You can also say Open YouTube, Open Google, Search basketball drills, Calculate 25 times 18, What time is it, or Who created you.";
+
+ }
+
+
+ /* TIME */
+
+ if(
+  q.includes("what time") ||
+  q==="time" ||
+  q.startsWith("time ")
+ ){
+
+  return "The current local time is "+
+   new Date().toLocaleTimeString(
+    [],
+    {
+     hour:"2-digit",
+     minute:"2-digit",
+     second:"2-digit"
+    }
+   )+".";
+
+ }
+
+
+ /* DATE */
+
+ if(
+  q.includes("what date") ||
+  q==="date" ||
+  q==="today"
+ ){
+
+  return "Today is "+
+   new Date().toLocaleDateString(
+    [],
+    {
+     weekday:"long",
+     year:"numeric",
+     month:"long",
+     day:"numeric"
+    }
+   )+".";
+
+ }
+
+
+ /* STATUS */
+
+ if(
+  q==="status" ||
+  q.includes("system status") ||
+  q.includes("diagnostic") ||
+  q.includes("systems okay")
+ ){
+
+  return "OMEGA diagnostics complete. Neural core stable. Voice interface ready. Telemetry online. Color engine automatic.";
+
+ }
+
+
+ /* JOKE */
+
+ if(q.includes("joke")){
+
+  const jokes=[
+
+   "Why did the computer get cold? It left its Windows open.",
+
+   "Why did the programmer quit? He didn't get arrays.",
+
+   "I told my CPU to relax. It said it had too many processes.",
+
+   "Why do programmers prefer dark mode? Because light attracts bugs.",
+
+   "My computer and I have one thing in common. We both need more RAM."
+
+  ];
+
+  return jokes[
+   Math.floor(
+    Math.random()*jokes.length
+   )
+  ];
+
+ }
+
+
+ /* SEARCH */
+
+ if(q.startsWith("search ")){
+
+  const term=
+   raw.substring(7).trim();
+
+  if(term){
+
+   window.open(
+    "https://www.google.com/search?q="+
+    encodeURIComponent(term),
+    "_blank"
+   );
+
+   return "Searching Google for "+term+".";
+
+  }
+
+ }
+
+
+ /* OPEN */
+
+ for(const name in websites){
+
+  if(
+   q===name ||
+   q.includes("open "+name) ||
+   q.includes("launch "+name)
+  ){
+
+   openWebsite(name);
+
+   return null;
+
+  }
+
+ }
+
+
+ /* CALCULATOR */
+
+ let expression=null;
+
+ const calc1=
+  raw.match(
+   /^calculate\s+(.+)/i
+  );
+
+ if(calc1)
+  expression=calc1[1];
+
+ const calc2=
+  raw.match(
+   /^what is\s+([0-9+\-*/().%\s]+)$/i
+  );
+
+ if(calc2)
+  expression=calc2[1];
+
+ if(expression){
+
+  const result=
+   calculator(expression);
+
+  if(result!==null){
+
+   return "The answer is "+result+".";
+
+  }
+
+ }
+
+
+ /* COLOR */
+
+ if(
+  q.includes("change color") ||
+  q.includes("auto color") ||
+  q.includes("rainbow")
+ ){
+
+  return "Automatic cinematic color engine is already active.";
+
+ }
+
+
+ /* KNOWLEDGE */
+
+ const found=
+  findKnowledge(raw);
+
+ if(found)
+  return found;
+
+
+ /* FALLBACK */
+
+ return "I don't have that exact answer in my offline core yet. Try saying “search " + raw + "” and I will open a web search for it.";
+
+}
+
+
+/* =====================================
+   ASK ENGINE
+===================================== */
+
+function ask(text){
+
+ text=text.trim();
+
+ if(!text)return;
+
+ addMessage("user",text);
+
+ $("state").textContent="ANALYZING";
+ $("status").textContent="PROCESSING";
+
+ setTimeout(()=>{
+
+  const answer=
+   localAI(text);
+
+  if(answer!==null)
+   response(answer);
+
+  $("state").textContent="STANDBY";
+  $("status").textContent="ONLINE";
+
+ },350);
+
+}
+
+
+/* =====================================
+   SEND BUTTON
+===================================== */
+
+$("send").onclick=()=>{
+
+ const text=
+  $("input").value.trim();
+
+ if(!text)return;
+
+ $("input").value="";
+
+ ask(text);
+
+};
+
+
+/* =====================================
+   ENTER
+===================================== */
+
+$("input").addEventListener(
+ "keydown",
+ e=>{
+
+  if(e.key==="Enter")
+   $("send").click();
+
+ }
+);
+
+
+/* =====================================
+   COMMAND BUTTONS
+===================================== */
+
+document
+ .querySelectorAll(".cmd")
+ .forEach(btn=>{
+
+  btn.onclick=()=>{
+
+   ask(btn.dataset.q);
+
+  };
+
+ });
+
+
+/* =====================================
+   MICROPHONE
+===================================== */
+
+$("mic").onclick=()=>{
+
+ const SpeechRecognition=
+  window.SpeechRecognition ||
+  window.webkitSpeechRecognition;
+
+ if(!SpeechRecognition){
+
+  response(
+   "Speech recognition is not supported here. Please use Chrome."
+  );
+
+  return;
+
+ }
+
+
+ if(listening){
+
+  recognition.stop();
+
+  return;
+
+ }
+
+
+ recognition=
+  new SpeechRecognition();
+
+ recognition.lang="en-US";
+
+ recognition.interimResults=false;
+
+ recognition.continuous=false;
+
+ listening=true;
+
+ $("mic").classList.add("active");
+
+ $("state").textContent="LISTENING";
+ $("status").textContent="LISTENING";
+ $("voice").textContent="LISTENING";
+
+
+ recognition.onresult=e=>{
+
+  const text=
+   e.results[0][0].transcript;
+
+  $("input").value=text;
+
+  ask(text);
+
+ };
+
+
+ recognition.onerror=()=>{
+
+  response(
+   "I could not hear you clearly. Please try again."
+  );
+
+ };
+
+
+ recognition.onend=()=>{
+
+  listening=false;
+
+  $("mic").classList.remove("active");
+
+  $("state").textContent="STANDBY";
+  $("status").textContent="ONLINE";
+  $("voice").textContent="READY";
+
+ };
+
+
+ recognition.start();
+
+};
+
+
+/* =====================================
+   WELCOME
+===================================== */
+
+addMessage(
+ "ai",
+ "J.A.R.V.I.S OMEGA is online. Created by Munkhtur. Neural core ready."
+);
+
+
+/* =====================================
+   COLOR ENGINE
+===================================== */
+
+setInterval(()=>{
+
+ hue=(hue+1)%360;
+
+ root.style.setProperty(
+  "--h",
+  hue
+ );
+
+},80);
+
+
+/* =====================================
+   TELEMETRY
+===================================== */
+
+setInterval(()=>{
+
+ const power=
+  88+
+  Math.floor(
+   Math.random()*12
+  );
+
+ const load=
+  15+
+  Math.floor(
+   Math.random()*45
+  );
+
+ $("power").style.width=
+  power+"%";
+
+ $("load").style.width=
+  load+"%";
+
+ $("powerText").textContent=
+  power+"%";
+
+ $("loadText").textContent=
+  load+"%";
+
+ const seconds=
+  Math.floor(
+   (Date.now()-started)/1000
+  );
+
+ $("uptime").textContent=
+  String(
+   Math.floor(seconds/60)
+  ).padStart(2,"0")
+  +":"+
+  String(
+   seconds%60
+  ).padStart(2,"0");
+
+},900);
+
+
+/* =====================================
+   PARTICLE ENGINE
+===================================== */
+
+const canvas=$("space");
+const ctx=canvas.getContext("2d");
+
+let stars=[];
 
 function resize(){
 
-  dpr =
-    Math.min(
-      window.devicePixelRatio || 1,
-      1.5
-    );
+ canvas.width=
+  innerWidth*
+  devicePixelRatio;
 
-  W =
-    window.innerWidth;
+ canvas.height=
+  innerHeight*
+  devicePixelRatio;
 
-  H =
-    window.innerHeight;
+ ctx.setTransform(
+  devicePixelRatio,
+  0,
+  0,
+  devicePixelRatio,
+  0,
+  0
+ );
 
-  canvas.width =
-    Math.floor(W*dpr);
+ stars=[];
 
-  canvas.height =
-    Math.floor(H*dpr);
-
-  canvas.style.width =
-    W+"px";
-
-  canvas.style.height =
-    H+"px";
-
-  ctx.setTransform(
-    dpr,0,0,dpr,0,0
+ const amount=
+  Math.min(
+   180,
+   Math.floor(
+    innerWidth/6
+   )
   );
+
+ for(let i=0;i<amount;i++){
+
+  stars.push({
+
+   x:Math.random()*innerWidth,
+
+   y:Math.random()*innerHeight,
+
+   r:Math.random()*1.7+.2,
+
+   speed:Math.random()*.45+.04,
+
+   drift:(Math.random()-.5)*.2
+
+  });
+
+ }
 
 }
 
 resize();
 
-window.addEventListener(
-  "resize",
-  resize,
-  {passive:true}
+addEventListener(
+ "resize",
+ resize
 );
 
 
-/* Generate virtual 4D coordinates */
+function particles(){
 
-for(
-  let i=0;
-  i<COUNT;
-  i++
-){
+ ctx.clearRect(
+  0,
+  0,
+  innerWidth,
+  innerHeight
+ );
 
-  particles.push({
+ for(const s of stars){
 
-    x:(Math.random()-.5)*2,
+  s.y+=s.speed;
+  s.x+=s.drift;
 
-    y:(Math.random()-.5)*2,
+  if(s.y>innerHeight){
 
-    z:Math.random()*2+.2,
+   s.y=0;
+   s.x=Math.random()*innerWidth;
 
-    w:(Math.random()-.5)*2,
+  }
 
-    speed:
-      .0004+
-      Math.random()*.0012,
+  if(s.x>innerWidth)s.x=0;
+  if(s.x<0)s.x=innerWidth;
 
-    size:
-      .5+
-      Math.random()*1.5
+  ctx.fillStyle=
+   `hsla(${hue},100%,75%,${.15+s.r/3})`;
 
-  });
+  ctx.beginPath();
+
+  ctx.arc(
+   s.x,
+   s.y,
+   s.r,
+   0,
+   Math.PI*2
+  );
+
+  ctx.fill();
+
+ }
+
+ requestAnimationFrame(
+  particles
+ );
 
 }
 
+particles();
 
-/* ---------- ANIMATION ---------- */
 
-let last=0;
+/* =====================================
+   BOOT SEQUENCE
+===================================== */
 
-function render(time){
+const bootLines=[
+
+ "INITIALIZING NEURAL CORE...",
+
+ "CALIBRATING HOLOGRAPHIC MATRIX...",
+
+ "LOADING OMEGA SYSTEMS...",
+
+ "ESTABLISHING VOICE LINK...",
+
+ "STARTING CINEMATIC ENGINE...",
+
+ "COLOR ENGINE ONLINE...",
+
+ "J.A.R.V.I.S READY"
+
+];
+
+let bootIndex=0;
+
+const bootTimer=
+ setInterval(()=>{
+
+  bootIndex++;
 
   if(
-    !animationRunning
+   bootIndex<
+   bootLines.length
   ){
 
-    requestAnimationFrame(
-      render
-    );
-
-    return;
+   $("bootText").textContent=
+    bootLines[bootIndex];
 
   }
 
-
-  /* FPS throttle */
-
-  if(
-    time-last < 28
-  ){
-
-    requestAnimationFrame(
-      render
-    );
-
-    return;
-
-  }
-
-  last=time;
+ },320);
 
 
-  ctx.clearRect(
-    0,
-    0,
-    W,
-    H
-  );
+setTimeout(()=>{
+
+ clearInterval(bootTimer);
+
+ $("boot").style.opacity="0";
+
+ setTimeout(()=>{
+
+  $("boot").style.display="none";
+
+ },800);
+
+},2500);
 
 
-  const cx =
-    W*.5;
-
-  const cy =
-    H*.42;
-
-
-  for(
-    const p of particles
-  ){
-
-    /*
-      Fake 4D rotation:
-      W affects scale and depth.
-    */
-
-    p.w +=
-      p.speed*1.5;
-
-    if(p.w>1)
-      p.w=-1;
-
-
-    p.z -=
-      p.speed*3;
-
-
-    if(p.z<.15)
-      p.z=2;
-
-
-    const depth =
-      p.z +
-      p.w*.28;
-
-
-    const scale =
-      110 /
-      Math.max(
-        depth,
-        .15
-      );
-
-
-    const x =
-      cx +
-      p.x*scale;
-
-    const y =
-      cy +
-      p.y*scale;
-
-
-    if(
-      x<0 ||
-      x>W ||
-      y<0 ||
-      y>H
-    ) continue;
-
-
-    const alpha =
-      Math.max(
-        .05,
-        Math.min(
-          .85,
-          1/depth*.18
-        )
-      );
-
-
-    ctx.globalAlpha =
-      alpha;
-
-    ctx.fillStyle =
-      "#ff1515";
-
-    ctx.beginPath();
-
-    ctx.arc(
-      x,
-      y,
-      p.size/
-      Math.max(
-        depth*.6,
-        .4
-      ),
-      0,
-      Math.PI*2
-    );
-
-    ctx.fill();
-
-  }
-
-  ctx.globalAlpha=1;
-
-  requestAnimationFrame(
-    render
-  );
-
-}
-
-requestAnimationFrame(
-  render
-);
-
-
-/* Pause heavy animation when tab hidden */
+/* =====================================
+   KEYBOARD SHORTCUT
+===================================== */
 
 document.addEventListener(
-  "visibilitychange",
-  ()=>{
-    animationRunning =
-      !document.hidden;
-  }
-);
-
-
-/* =========================================================
-   CHAT
-   ========================================================= */
-
-let history=[];
-
-function addMessage(
-  text,
-  type
-){
-
-  const el =
-    document.createElement(
-      "div"
-    );
-
-  el.className =
-    "msg "+type;
-
-
-  const label =
-    document.createElement(
-      "span"
-    );
-
-  label.className =
-    "label";
-
-  label.textContent =
-    type==="user"
-      ? "YOU"
-      : "J.A.R.V.I.S";
-
-
-  const content =
-    document.createElement(
-      "span"
-    );
-
-  content.textContent =
-    text;
-
-
-  el.appendChild(label);
-  el.appendChild(content);
-
-  messages.appendChild(el);
-
-  messages.scrollTop =
-    messages.scrollHeight;
-
-}
-
-
-/* =========================================================
-   THINKING
-   ========================================================= */
-
-function thinking(){
-
-  const el =
-    document.createElement(
-      "div"
-    );
-
-  el.id="thinking";
-
-  el.className="msg ai";
-
-  el.innerHTML=`
-    <span class="label">J.A.R.V.I.S</span>
-    <span class="thinking">
-      <span></span>
-      <span></span>
-      <span></span>
-    </span>
-  `;
-
-  messages.appendChild(el);
-
-  messages.scrollTop =
-    messages.scrollHeight;
-
-}
-
-function removeThinking(){
-
-  const el =
-    document.getElementById(
-      "thinking"
-    );
-
-  if(el)
-    el.remove();
-
-}
-
-
-/* =========================================================
-   VOICE OUTPUT
-   ========================================================= */
-
-function speak(text){
+ "keydown",
+ e=>{
 
   if(
-    !("speechSynthesis" in window)
-  )
-    return;
-
-
-  speechSynthesis.cancel();
-
-
-  const u =
-    new SpeechSynthesisUtterance(
-      text
-    );
-
-
-  u.lang="en-US";
-
-  u.rate=.94;
-
-  u.pitch=.82;
-
-  u.volume=1;
-
-
-  u.onstart=()=>{
-
-    core.classList.remove(
-      "listen"
-    );
-
-    core.classList.add(
-      "speak"
-    );
-
-    mode.textContent=
-      "VOICE OUTPUT";
-
-    state.textContent=
-      "SPEAKING";
-
-  };
-
-
-  u.onend=()=>{
-
-    core.classList.remove(
-      "speak"
-    );
-
-    mode.textContent=
-      "SYSTEM READY";
-
-    state.textContent=
-      "STANDBY";
-
-  };
-
-
-  speechSynthesis.speak(u);
-
-}
-
-
-function stopVoice(){
-
-  if(
-    "speechSynthesis" in window
+   e.ctrlKey &&
+   e.code==="Space"
   ){
 
-    speechSynthesis.cancel();
+   e.preventDefault();
+
+   $("mic").click();
 
   }
 
-  core.classList.remove(
-    "speak"
-  );
-
-  mode.textContent=
-    "SYSTEM READY";
-
-  state.textContent=
-    "STANDBY";
-
-}
-
-
-/* =========================================================
-   WEBSITE COMMANDS
-   ========================================================= */
-
-const sites={
-
-  youtube:
-    "https://www.youtube.com",
-
-  google:
-    "https://www.google.com",
-
-  instagram:
-    "https://www.instagram.com",
-
-  facebook:
-    "https://www.facebook.com",
-
-  messenger:
-    "https://www.messenger.com",
-
-  tiktok:
-    "https://www.tiktok.com",
-
-  spotify:
-    "https://open.spotify.com",
-
-  roblox:
-    "https://www.roblox.com",
-
-  minecraft:
-    "https://www.minecraft.net",
-
-  "standoff 2":
-    "https://standoff2.com"
-
-};
-
-
-function openSite(
-  name
-){
-
-  window.open(
-    sites[name],
-    "_blank"
-  );
-
-}
-
-
-/* =========================================================
-   LOCAL COMMANDS
-   ========================================================= */
-
-function localCommand(
-  raw
-){
-
-  const q =
-    raw.toLowerCase().trim();
-
-
-  /* creator */
-
-  if(
-    q.includes(
-      "who created you"
-    ) ||
-    q.includes(
-      "who made you"
-    ) ||
-    q.includes(
-      "who built you"
-    ) ||
-    q.includes(
-      "who is your creator"
-    ) ||
-    q.includes(
-      "who created jarvis"
-    )
-  ){
-
-    return `
-I was created and built by Munkhtur.
-
-Munkhtur is the creator of this J.A.R.V.I.S project. He designed this system as a futuristic personal AI assistant.
-`.trim();
-
-  }
-
-
-  /* munkhtur */
-
-  if(
-    q==="munkhtur" ||
-    q.includes(
-      "tell me about munkhtur"
-    )
-  ){
-
-    return `
-Munkhtur is the creator of this J.A.R.V.I.S project. He is interested in technology, AI, coding, sports and creative projects.
-`.trim();
-
-  }
-
-
-  /* identity */
-
-  if(
-    q==="who are you" ||
-    q==="what are you"
-  ){
-
-    return `
-I am J.A.R.V.I.S, a futuristic AI assistant created by Munkhtur.
-`.trim();
-
-  }
-
-
-  /* time */
-
-  if(
-    q==="time" ||
-    q.includes(
-      "what time is it"
-    )
-  ){
-
-    return (
-      "The current time is "+
-      new Date().toLocaleTimeString(
-        "en-US",
-        {
-          hour:"numeric",
-          minute:"2-digit"
-        }
-      )
-    );
-
-  }
-
-
-  /* date */
-
-  if(
-    q==="date" ||
-    q.includes(
-      "what date is it"
-    ) ||
-    q.includes(
-      "what is today's date"
-    )
-  ){
-
-    return (
-      "Today is "+
-      new Date().toLocaleDateString(
-        "en-US",
-        {
-          weekday:"long",
-          year:"numeric",
-          month:"long",
-          day:"numeric"
-        }
-      )
-    );
-
-  }
-
-
-  /* joke */
-
-  if(
-    q==="joke" ||
-    q.includes(
-      "tell me a joke"
-    )
-  ){
-
-    const jokes=[
-
-      "Why was the computer cold? It left its Windows open.",
-
-      "Why did the programmer quit his job? He didn't get arrays.",
-
-      "What do computers eat? Microchips.",
-
-      "Why do programmers prefer dark mode? Because light attracts bugs."
-
-    ];
-
-    return jokes[
-      Math.floor(
-        Math.random()*
-        jokes.length
-      )
-    ];
-
-  }
-
-
-  /* stop */
-
-  if(
-    q==="stop" ||
-    q==="stop speaking" ||
-    q==="be quiet"
-  ){
-
-    stopVoice();
-
-    return "Voice output stopped.";
-
-  }
-
-
-  /* clear */
-
-  if(
-    q==="clear" ||
-    q==="clear chat"
-  ){
-
-    messages.innerHTML="";
-
-    history=[];
-
-    return "Conversation cleared.";
-
-  }
-
-
-  /* websites */
-
-  for(
-    const name in sites
-  ){
-
-    if(
-      q.includes(
-        "open "+name
-      )
-    ){
-
-      openSite(name);
-
-      return (
-        "Opening "+
-        name+
-        "."
-      );
-
-    }
-
-  }
-
-
-  return null;
-
-}
-
-
-/* =========================================================
-   AI BACKEND
-   ========================================================= */
-
-async function askAI(
-  question
-){
-
-  if(!AI_BACKEND){
-
-    return `
-My advanced AI brain is not connected yet.
-
-The J.A.R.V.I.S interface, English microphone, voice system and command engine are ready. Connect the secure backend to answer unlimited questions.
-`.trim();
-
-  }
-
-
-  try{
-
-    const response =
-      await fetch(
-        AI_BACKEND,
-        {
-          method:"POST",
-
-          headers:{
-            "Content-Type":
-              "application/json"
-          },
-
-          body:JSON.stringify({
-
-            message:
-              question,
-
-            history:
-              history
-
-          })
-
-        }
-      );
-
-
-    if(
-      !response.ok
-    ){
-
-      throw new Error(
-        "HTTP "+
-        response.status
-      );
-
-    }
-
-
-    const data =
-      await response.json();
-
-
-    return (
-      data.reply ||
-      data.output ||
-      "The AI returned no response."
-    );
-
-  }
-  catch(error){
-
-    console.error(error);
-
-    return `
-Connection to my AI brain failed. Please check the backend.
-`.trim();
-
-  }
-
-}
-
-
-/* =========================================================
-   MAIN ASK
-   ========================================================= */
-
-let busy=false;
-
-async function ask(
-  text
-){
-
-  text =
-    text.trim();
-
-
-  if(
-    !text ||
-    busy
-  )
-    return;
-
-
-  addMessage(
-    text,
-    "user"
-  );
-
-
-  input.value="";
-
-
-  /* Local command */
-
-  const local =
-    localCommand(text);
-
-
-  if(local){
-
-    addMessage(
-      local,
-      "ai"
-    );
-
-    speak(local);
-
-    return;
-
-  }
-
-
-  /* AI */
-
-  busy=true;
-
-  send.disabled=true;
-
-  mode.textContent=
-    "NEURAL PROCESSING";
-
-  state.textContent=
-    "THINKING";
-
-
-  thinking();
-
-
-  const answer =
-    await askAI(text);
-
-
-  removeThinking();
-
-
-  addMessage(
-    answer,
-    "ai"
-  );
-
-
-  history.push({
-
-    role:"user",
-
-    content:text
-
-  });
-
-
-  history.push({
-
-    role:"assistant",
-
-    content:answer
-
-  });
-
-
-  if(
-    history.length>20
-  ){
-
-    history=
-      history.slice(-20);
-
-  }
-
-
-  speak(answer);
-
-
-  busy=false;
-
-  send.disabled=false;
-
-}
-
-
-/* =========================================================
-   SEND
-   ========================================================= */
-
-send.addEventListener(
-  "click",
-  ()=>{
-    ask(input.value);
-  }
-);
-
-
-/* =========================================================
-   ENTER
-   ========================================================= */
-
-input.addEventListener(
-  "keydown",
-  e=>{
-
-    if(
-      e.key==="Enter"
-    ){
-
-      e.preventDefault();
-
-      ask(input.value);
-
-    }
-
-  }
-);
-
-
-/* =========================================================
-   ENGLISH MICROPHONE
-   ========================================================= */
-
-const Recognition =
-  window.SpeechRecognition ||
-  window.webkitSpeechRecognition;
-
-let recognition=null;
-
-let listening=false;
-
-
-if(Recognition){
-
-  recognition =
-    new Recognition();
-
-
-  recognition.lang=
-    "en-US";
-
-
-  recognition.continuous=
-    false;
-
-
-  recognition.interimResults=
-    false;
-
-
-  recognition.maxAlternatives=
-    1;
-
-
-  recognition.onstart=()=>{
-
-    listening=true;
-
-    mic.classList.add(
-      "active"
-    );
-
-    core.classList.add(
-      "listen"
-    );
-
-    mode.textContent=
-      "LISTENING";
-
-    state.textContent=
-      "VOICE INPUT";
-
-  };
-
-
-  recognition.onresult=
-    event=>{
-
-      const text =
-        event.results
-          [0][0]
-          .transcript;
-
-
-      input.value=
-        text;
-
-
-      ask(text);
-
-    };
-
-
-  recognition.onerror=
-    event=>{
-
-      console.log(
-        "Speech error:",
-        event.error
-      );
-
-      listening=false;
-
-      mic.classList.remove(
-        "active"
-      );
-
-      core.classList.remove(
-        "listen"
-      );
-
-      mode.textContent=
-        "SYSTEM READY";
-
-      state.textContent=
-        "STANDBY";
-
-    };
-
-
-  recognition.onend=()=>{
-
-    listening=false;
-
-    mic.classList.remove(
-      "active"
-    );
-
-    core.classList.remove(
-      "listen"
-    );
-
-    if(
-      !speechSynthesis.speaking
-    ){
-
-      mode.textContent=
-        "SYSTEM READY";
-
-      state.textContent=
-        "STANDBY";
-
-    }
-
-  };
-
-
-  mic.addEventListener(
-    "click",
-    ()=>{
-
-      if(listening){
-
-        recognition.stop();
-
-        return;
-
-      }
-
-
-      try{
-
-        recognition.start();
-
-      }
-      catch(e){
-
-        console.log(e);
-
-      }
-
-    }
-  );
-
-}
-else{
-
-  mic.addEventListener(
-    "click",
-    ()=>{
-
-      alert(
-        "English voice recognition is not supported. Try Chrome."
-      );
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   ESC STOP
-   ========================================================= */
-
-document.addEventListener(
-  "keydown",
-  e=>{
-
-    if(
-      e.key==="Escape"
-    ){
-
-      stopVoice();
-
-    }
-
-  }
-);
-
-
-/* =========================================================
-   STARTUP
-   ========================================================= */
-
-addMessage(
-  "J.A.R.V.I.S online. Hello Munkhtur. Neural interface ready. Ask me anything.",
-  "ai"
+ }
 );
 
 </script>
 
 </body>
-    </html>
+  </html>
